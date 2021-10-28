@@ -46,22 +46,44 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
         //实现在两个块中间插入正在拖拽的块
         int positionIndex = emptyBlockParentCache.childCount;//位置参数
+
+
         //遍历位置
-        // Todo: 目前只能单行插入，但是需要实现多行插入，添加y的判断
         for(int i = 0; i < emptyBlockParentCache.childCount; i++)
         {
-            if(this.transform.position.x < emptyBlockParentCache.GetChild(i).position.x)
+            this.transform.SetSiblingIndex(positionIndex);
+
+            if (this.transform.position.x < emptyBlockParentCache.GetChild(i).position.x)
             {
                 positionIndex = i;
+
+                //如果拖拽的物体与目标位置不在同一行，则将参数+8，8是一行的格子数量，但是这样只能支持两行，得读取到中间差了几行，然后就加几个8
+                if (this.transform.position.y < emptyBlockParentCache.GetChild(i).position.y)
+                {
+                    int row = 0;
+                    
+                    //如果两者不在一行（7的原因是限制一行只能有8个块）
+                    if (emptyBlockParentCache.childCount > 7)
+                    {
+                        float y = emptyBlockParentCache.GetChild(8).position.y - emptyBlockParentCache.GetChild(0).position.y;
+                        row = (int)((emptyBlockParentCache.GetChild(i).position.y - this.transform.position.y)/y) * (-1);
+                    }
+
+                    positionIndex += 8 * row;
+                    
+                }
+
                 if (emptyBlock.transform.GetSiblingIndex() < positionIndex)
                 {
                     positionIndex--;
                 }
-                //emptyBlockSpace.transform.SetSiblingIndex(i);
+
                 break;
             }
         }
+
         emptyBlock.transform.SetSiblingIndex(positionIndex);
+        
     }
 
     public void OnEndDrag(PointerEventData eventData)
