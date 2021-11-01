@@ -6,6 +6,14 @@ TagManager:
   tags:
   - MAST_Holder
   - basic_command_panel
+  - MoveForward
+  - TurnLeft
+  - TurnRight
+  - Attack
+  - Collect
+  - If
+  - Loop
+  - Treasure
   layers:
   - Default
   - TransparentFX

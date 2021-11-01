@@ -46,16 +46,4 @@ public class Drop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerE
             drag.emptyBlockParentCache = drag.transformParentCache;//将暂存的父类更改为drop所在的面板
         }
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -33,8 +33,21 @@ public class GenerateBlock : MonoBehaviour, IPointerDownHandler
     {
         //throw new System.NotImplementedException();
         Debug.Log(eventData);
+        GameObject prefab = null;
         //Todo: 这里用if或者switch判断不同块的名字，不行的话就用笨方法，每一个基础块都设置一个对应的脚本加载.  正常应该可以用for循环一下每个块的位置，如果对上了就是
-        GameObject prefab = Resources.Load<GameObject>("MoveForward");//这里改成调用每个按钮的名字
+        string objectTag = this.gameObject.tag;
+        prefab = Resources.Load<GameObject>(objectTag);
+        /*switch (objectTag)
+        {
+            case "MoveForward":
+                prefab = Resources.Load<GameObject>("MoveForward");
+            case "TurnLeft"
+        }*/
+        /*if (this.gameObject.tag.Equals("MoveForward"))
+        {
+            prefab = Resources.Load<GameObject>("MoveForward");//这里改成调用每个按钮的名字
+        }*/
+        
 
         //Todo: 这里到用到if和loop的关卡的时候设置一个选择器，选择点击后块出现在什么地方，选择器的内容对应下面Find里的内容
         if (prefab != null)
