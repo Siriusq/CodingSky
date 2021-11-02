@@ -55,7 +55,7 @@ public class GenerateBlock : MonoBehaviour, IPointerDownHandler
             block = Instantiate(prefab);
             
             //block.transform.SetParent(this.transform.parent.parent.GetChild(1));
-            block.transform.SetParent(this.transform.parent.parent.Find("Execute Area"));//改变父类
+            block.transform.SetParent(this.transform.parent.parent.Find("Execute Panel"));//改变父类
             block.transform.localScale = new Vector3(1, 1, 1);//如果不设置的话默认会缩放成0.7倍，很奇怪
             //isDraging = true;
         }
