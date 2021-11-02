@@ -14,6 +14,8 @@ TagManager:
   - If
   - Loop
   - Treasure
+  - Test
+  - SubCondition
   layers:
   - Default
   - TransparentFX
