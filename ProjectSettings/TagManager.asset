@@ -16,6 +16,7 @@ TagManager:
   - Treasure
   - Test
   - SubCondition
+  - LoopPanel
   layers:
   - Default
   - TransparentFX

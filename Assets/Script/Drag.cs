@@ -54,7 +54,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (emptyBlock.transform.parent != emptyBlockParentCache)
         {
             emptyBlock.transform.SetParent(emptyBlockParentCache);
-        }
+        }        
 
         //实现在两个块中间插入正在拖拽的块
         int positionIndex = emptyBlockParentCache.childCount;//位置参数
@@ -85,7 +85,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 break;
             }
         }
-        Debug.Log(positionIndex);
+        //Debug.Log(positionIndex);
         emptyBlock.transform.SetSiblingIndex(positionIndex);
     }
 
@@ -103,10 +103,28 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             prefab = null;
         }
 
+        // if 面板托盘中的判断
         if (this.transform.parent.CompareTag("SubCondition"))
         {
-            Destroy(this.transform.parent.GetChild(1));
+            //Debug.Log(this.transform.parent.childCount);
+            // 防止用户搞事情，把 if 代码块拖到自己的condition中去
+            if (this.transform.tag.Equals("If"))
+            {
+                Destroy(this.gameObject);
+                // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+            }
+            // 如果面板中已经存在其他代码块，那么在拖动新的代码块过来之后删除原来的，这个2还是因为unity愚蠢的List计数问题
+            else if(this.transform.parent.childCount > 2)
+            {
+                DestroyImmediate(this.transform.parent.GetChild(2).gameObject);
+            }            
         }
+
+        //防止用户把循环代码块拖到自己的循环里去
+        if (this.transform.parent.CompareTag("LoopPanel") && this.transform.tag.Equals("Loop"))
+        {
+            Destroy(this.gameObject);
+        }            
 
         GetComponent<CanvasGroup>().blocksRaycasts = true;//拖拽结束时恢复UI拦截
         Destroy(emptyBlock);//结束时删除占位符
