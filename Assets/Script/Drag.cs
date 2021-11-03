@@ -70,10 +70,10 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 if (this.transform.position.y < emptyBlockParentCache.GetChild(i).position.y)
                 {
                     int row = 0;
-                    //如果两者不在一行（6的原因是限制一行只能有7个块）                    
+                    //如果两者不在一行，因为gird中的限制是一行7个               
                     if (emptyBlockParentCache.childCount > 7)
                     {
-                        float y = emptyBlockParentCache.GetChild(8).position.y - emptyBlockParentCache.GetChild(1).position.y;
+                        float y = emptyBlockParentCache.GetChild(7).position.y - emptyBlockParentCache.GetChild(0).position.y;//正常应该是8，但是unity会在child序号变动的时候自己-1，所以是7，如果是8的话会报错溢出
                         row = (int)((emptyBlockParentCache.GetChild(i).position.y - this.transform.position.y) / y) * (-1);
                     }                    
                     positionIndex += 7 * row;
