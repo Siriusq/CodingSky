@@ -124,7 +124,12 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (this.transform.parent.CompareTag("LoopPanel") && this.transform.tag.Equals("Loop"))
         {
             Destroy(this.gameObject);
-        }            
+        }
+
+        //删除拖动的物体
+        if (this.transform.parent.CompareTag("Delete")){
+            Destroy(this.gameObject);
+        }
 
         GetComponent<CanvasGroup>().blocksRaycasts = true;//拖拽结束时恢复UI拦截
         Destroy(emptyBlock);//结束时删除占位符
