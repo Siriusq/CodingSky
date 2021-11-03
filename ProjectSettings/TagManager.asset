@@ -18,6 +18,8 @@ TagManager:
   - SubCondition
   - LoopPanel
   - Delete
+  - execute_panel
+  - PlaceHolder
   layers:
   - Default
   - TransparentFX
