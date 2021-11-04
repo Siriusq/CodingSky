@@ -11,8 +11,14 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public Slider loopCountSlider;// 调整循环次数的滑块
     private GameObject loopPanel; // 循环面板
-    private int loopTime; //循环次数
-    
+    private int loopTime; // 循环次数
+    public ArrayList loopBlockTags = new ArrayList(); // 存储主循环面版内命令的数组
+
+    public Slider subLoopCountSlider;// 调整子循环次数的滑块
+    private GameObject subLoopPanel; // 子循环面板
+    private int subLoopTime; // 子循环次数
+    public ArrayList subLoopBlockTags = new ArrayList(); // 存储子循环面版内命令的数组
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,25 +36,62 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         //throw new System.NotImplementedException();
         codeBlockTags = new ArrayList(); //清空数组缓存，因为游戏中可能会多次点击运行按钮
+        loopBlockTags = new ArrayList();
+        subLoopBlockTags = new ArrayList();
         executePanel = GameObject.FindGameObjectWithTag("execute_panel"); // 找到游戏中的执行面版
         int childCount = executePanel.transform.childCount; //面板中代码块的个数
-        if(childCount != 0)
+
+        loopPanel = GameObject.FindGameObjectWithTag("LoopPanel");
+        subLoopPanel = GameObject.FindGameObjectWithTag("SubLoopPanel");
+
+        // 添加次循环中的代码块到数组
+        if (subLoopPanel.transform.childCount != 0)
+        {
+            subLoopTime = (int)subLoopCountSlider.value;
+            
+            for (int i = 0; i < subLoopTime; i++)
+            {
+                foreach (Transform subLoopBlock in subLoopPanel.transform)
+                {
+                    subLoopBlockTags.Add(subLoopBlock.tag);
+                }
+            }
+        }
+
+        // 添加主循环中的代码块到数组,主循环可以包含子循环
+        if (loopPanel.transform.childCount != 0)
+        {
+            loopTime = (int)loopCountSlider.value;
+            
+            for (int i = 0; i < loopTime; i++)
+            {
+                foreach (Transform loopBlock in loopPanel.transform)
+                {
+                    if (loopBlock.tag.Equals("SubLoop"))
+                    {
+                        loopBlockTags.AddRange(subLoopBlockTags);
+                    }
+                    else
+                    {
+                        loopBlockTags.Add(loopBlock.tag);
+                    }                    
+                }
+            }
+        }
+
+        if (childCount != 0)
         {
             // Todo: 可以给运行到的代码块的高亮，不过应该加在人物移动那里
+
             foreach (Transform block in executePanel.transform)//遍历代码块
             {
                 if (block.tag.Equals("Loop"))// 如果出现循环代码块，就跳到循环面板里，将循环面板里的代码块按循环次数添加到数组里
                 {
-                    loopTime = (int)loopCountSlider.value;
-                    loopPanel = GameObject.FindGameObjectWithTag("LoopPanel");
-                    int loopChildCount = loopPanel.transform.childCount;
-                    for(int i = 0; i< loopTime; i++)
-                    {
-                        foreach (Transform loopBlock in loopPanel.transform)
-                        {
-                            codeBlockTags.Add(loopBlock.tag);
-                        }
-                    }
+                    codeBlockTags.AddRange(loopBlockTags);
+                }
+                else if (block.tag.Equals("SubLoop"))
+                {
+                    codeBlockTags.AddRange(subLoopBlockTags);
                 }
                 else if (block.tag.Equals("If"))// 如果出现条件代码块，这个得想想
                 {
@@ -59,9 +102,7 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                     codeBlockTags.Add(block.tag);
                 }                            
             }            
-        }
-
-        
+        }        
     }
 
     public void OnPointerUp(PointerEventData eventData)

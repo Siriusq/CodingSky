@@ -126,6 +126,12 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             Destroy(this.gameObject);
         }
 
+        //防止用户把循环代码块拖到自己的循环里去 + 防止用户把主循环拖到子循环里去
+        if (this.transform.parent.CompareTag("SubLoopPanel") && (this.transform.tag.Equals("Loop") || this.transform.tag.Equals("SubLoop")))
+        {
+            Destroy(this.gameObject);
+        }
+
         //删除拖动的物体
         if (this.transform.parent.CompareTag("Delete")){
             Destroy(this.gameObject);

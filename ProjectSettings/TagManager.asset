@@ -20,6 +20,8 @@ TagManager:
   - Delete
   - execute_panel
   - PlaceHolder
+  - SubLoopPanel
+  - SubLoop
   layers:
   - Default
   - TransparentFX
