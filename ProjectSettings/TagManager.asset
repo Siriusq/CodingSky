@@ -22,6 +22,8 @@ TagManager:
   - PlaceHolder
   - SubLoopPanel
   - SubLoop
+  - ConditionDropdown
+  - SubConditionElse
   layers:
   - Default
   - TransparentFX

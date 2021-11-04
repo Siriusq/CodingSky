@@ -19,6 +19,10 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private int subLoopTime; // 子循环次数
     public ArrayList subLoopBlockTags = new ArrayList(); // 存储子循环面版内命令的数组
 
+    private GameObject conditionIf; //if的面板
+    private GameObject conditionElse; //else的面板
+    public Dropdown conditionDropdown; //条件选择下拉菜单
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +47,9 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         loopPanel = GameObject.FindGameObjectWithTag("LoopPanel");
         subLoopPanel = GameObject.FindGameObjectWithTag("SubLoopPanel");
+
+        conditionIf = GameObject.FindGameObjectWithTag("SubCondition");
+        conditionElse = GameObject.FindGameObjectWithTag("SubConditionElse");
 
         // 添加次循环中的代码块到数组
         if (subLoopPanel.transform.childCount != 0)
@@ -77,6 +84,13 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                     }                    
                 }
             }
+        }
+
+        // 判断条件语句
+        if(conditionIf.transform.childCount != 0 && conditionElse.transform.childCount != 0)
+        {
+            int selectValue = conditionDropdown.value;// 下拉面板选择的代号，0或者1
+            //Todo: 判断人物前面是0还是1，如果传回的和setValue相同，添加if里的tag，不同就添加else里的tag
         }
 
         if (childCount != 0)
