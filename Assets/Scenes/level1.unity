@@ -12803,7 +12803,7 @@ MonoBehaviour:
   loopCountSlider: {fileID: 1497985595}
   subLoopCountSlider: {fileID: 1222260509}
   conditionDropdown: {fileID: 828272388}
-  dogKnight: {fileID: 864146240}
+  player: {fileID: 864146240}
 --- !u!1 &652990470
 GameObject:
   m_ObjectHideFlags: 0
@@ -16492,22 +16492,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 864146238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceede8c8cca0cdc4a9aedfde4a79ec6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8672d3574c5d3d84084489a830c29a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &864146244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 864146238}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b1957a134a64534d99ee3754bd07542, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 8
 --- !u!111 &864146245
 Animation:
   m_ObjectHideFlags: 0

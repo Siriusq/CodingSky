@@ -23,7 +23,7 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private GameObject conditionElse; //else的面板
     public Dropdown conditionDropdown; //条件选择下拉菜单
 
-    public PlayerMove dogKnight;
+    public Movement player;
 
 
     // Start is called before the first frame update
@@ -123,13 +123,7 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        //Test
-        foreach (string s in codeBlockTags)
-        {
-            Debug.Log(s);
-        }
-        // 传入到角色控制
-        dogKnight.Walk(codeBlockTags);
-        
+        player.GetCode(codeBlockTags);              
     }
+
 }
