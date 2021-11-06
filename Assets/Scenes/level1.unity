@@ -16491,24 +16491,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceede8c8cca0cdc4a9aedfde4a79ec6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  up: {x: 0, y: 0, z: 0}
-  right: {x: 0, y: 90, z: 0}
-  down: {x: 0, y: 180, z: 0}
-  left: {x: 0, y: 270, z: 0}
-  currentDirection: {x: 0, y: 0, z: 0}
-  upRight: {x: 0, y: 90, z: 0}
-  upLeft: {x: 0, y: 0, z: 0}
-  downRight: {x: 0, y: 180, z: 0}
-  downLeft: {x: 0, y: 270, z: 0}
-  playerFace: {x: 0, y: 0, z: 0}
-  nextPos: {x: 0, y: 0, z: 0}
-  destination: {x: 0, y: 0, z: 0}
-  direction: {x: 0, y: 0, z: 0}
-  speed: 5
-  rayLength: 1
-  canMove: 0
-  dogDirection: {x: 0, y: 90, z: 0}
-  count: 0
 --- !u!114 &864146240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16534,8 +16516,8 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
+  m_Interpolate: 1
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!111 &864146245
 Animation:

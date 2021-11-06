@@ -52,8 +52,8 @@ public class Movement : MonoBehaviour
         foreach (string s in received)
         {          
             Move(s);
-            Debug.Log(s);           
-            yield return new WaitForSeconds(1);
+            Debug.Log(s);            
+            yield return new WaitForSeconds(1.5f);
             dogBehaviour.SetBool("isMove", false);
         }
         finished = true;
@@ -76,17 +76,20 @@ public class Movement : MonoBehaviour
         }
         else if (x.Equals("TurnLeft"))
         {
-            direction = this.transform.position + leftRotation;
-            //Tweener tweener = transform.DOLocalRotate(direction, 1);
-            this.transform.Rotate(leftRotation);
+            dogBehaviour.SetBool("isMove", true);
+            direction = transform.forward;
+            direction.y -= 90;
+            Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);
+            //this.transform.Rotate(leftRotation);
         }
         else if (x.Equals("TurnRight"))
         {
-            direction = this.transform.position + rightRotation;
-            //Tweener tweener = transform.DOLocalRotate(direction, 1);
-            this.transform.Rotate(rightRotation);
-        }
-               
+            dogBehaviour.SetBool("isMove", true);
+            direction = transform.forward;
+            direction.y += 90;
+            Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);
+            //this.transform.Rotate(rightRotation);
+        }        
     }
 
     public void GetCode(ArrayList codes)
