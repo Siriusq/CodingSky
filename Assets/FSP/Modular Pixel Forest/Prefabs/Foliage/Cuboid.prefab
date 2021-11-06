@@ -106,6 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794967321785876929}
+  - component: {fileID: 6041838649648231616}
   m_Layer: 0
   m_Name: Cuboid
   m_TagString: Untagged
@@ -128,6 +129,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6041838649648231616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711142447543230136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c24365073825e624a979cb46251cd39f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &-5002022713723186373
 Mesh:
   m_ObjectHideFlags: 0
