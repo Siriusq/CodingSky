@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Movement : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class Movement : MonoBehaviour
     float speed = 500f;
     float rayLength = 1f;
     Vector3 currentVelocity = Vector3.zero;
-    float smoothTime = 0.3F;
+    float smoothTime = 3F;
 
     bool canMove;
 
@@ -34,24 +35,24 @@ public class Movement : MonoBehaviour
     {
         if (received != null && !readin)
         {
-            StartCoroutine(Test());
+            StartCoroutine(ExecuteBlocks());
             readin = true;
         }
 
         if (finished)
         {
-            StopCoroutine(Test());
+            StopCoroutine(ExecuteBlocks());
         }
 
     }
 
-    IEnumerator Test()
+    IEnumerator ExecuteBlocks()
     {
         Debug.Log("Start");
         foreach (string s in received)
-        {
+        {          
             Move(s);
-            Debug.Log(s);            
+            Debug.Log(s);           
             yield return new WaitForSeconds(1);
             dogBehaviour.SetBool("isMove", false);
         }
@@ -66,17 +67,23 @@ public class Movement : MonoBehaviour
         if (x.Equals("MoveForward"))
         {
             dogBehaviour.SetBool("isMove", true);
-            this.transform.position = Vector3.MoveTowards(this.transform.position, this.transform.position + transform.forward, speed * Time.deltaTime);
+            destination = this.transform.position + transform.forward;
+            Tweener tweener = transform.DOMove(destination, 1);
+            //this.transform.position = Vector3.MoveTowards(this.transform.position, this.transform.position + transform.forward, speed * Time.deltaTime);
             //Debug.Log(Time.deltaTime);
             //this.transform.position = Vector3.SmoothDamp(this.transform.position, this.transform.position + transform.forward, ref currentVelocity, 0.1f);
             //this.transform.position = Vector3.Lerp(this.transform.position, this.transform.position + transform.forward, speed * Time.deltaTime);
         }
         else if (x.Equals("TurnLeft"))
         {
+            direction = this.transform.position + leftRotation;
+            //Tweener tweener = transform.DOLocalRotate(direction, 1);
             this.transform.Rotate(leftRotation);
         }
         else if (x.Equals("TurnRight"))
         {
+            direction = this.transform.position + rightRotation;
+            //Tweener tweener = transform.DOLocalRotate(direction, 1);
             this.transform.Rotate(rightRotation);
         }
                
