@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
 
     bool canMove;
     public bool canCollect = false;
+    public bool canOPen = false;
 
     void Start()
     {
@@ -57,7 +58,9 @@ public class Movement : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             dogBehaviour.SetBool("isMove", false);
             canCollect = false;
+            canOPen = false;
             dogBehaviour.SetBool("isCollecting", false);
+            dogBehaviour.SetBool("isOpen", false);
         }
         finished = true;
         yield return new WaitForSeconds(1);        
@@ -97,6 +100,11 @@ public class Movement : MonoBehaviour
         {
             dogBehaviour.SetBool("isCollecting", true);
             canCollect = true;
+        }
+        else if (x.Equals("Treasure"))
+        {
+            dogBehaviour.SetBool("isOpen", true);
+            canOPen = true;
         }
     }
 
