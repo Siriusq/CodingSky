@@ -26,6 +26,8 @@ TagManager:
   - SubConditionElse
   - Execute
   - Gem
+  - Slime
+  - Turtle
   layers:
   - Default
   - TransparentFX
