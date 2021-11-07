@@ -25,6 +25,7 @@ TagManager:
   - ConditionDropdown
   - SubConditionElse
   - Execute
+  - Gem
   layers:
   - Default
   - TransparentFX

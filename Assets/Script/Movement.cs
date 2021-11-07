@@ -24,6 +24,7 @@ public class Movement : MonoBehaviour
     float smoothTime = 3F;
 
     bool canMove;
+    public bool canCollect = false;
 
     void Start()
     {
@@ -55,6 +56,8 @@ public class Movement : MonoBehaviour
             Debug.Log(s);            
             yield return new WaitForSeconds(1.5f);
             dogBehaviour.SetBool("isMove", false);
+            canCollect = false;
+            dogBehaviour.SetBool("isCollecting", false);
         }
         finished = true;
         yield return new WaitForSeconds(1);        
@@ -89,7 +92,12 @@ public class Movement : MonoBehaviour
             direction.y += 90;
             Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);
             //this.transform.Rotate(rightRotation);
-        }        
+        }
+        else if (x.Equals("Collect"))
+        {
+            dogBehaviour.SetBool("isCollecting", true);
+            canCollect = true;
+        }
     }
 
     public void GetCode(ArrayList codes)

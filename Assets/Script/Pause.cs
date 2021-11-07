@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//ÔÝÍ£ÓÎÏ·µÄ½Å±¾
 public class Pause : MonoBehaviour, IPointerDownHandler
 {
     public void OnPointerDown(PointerEventData eventData)
