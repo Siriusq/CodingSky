@@ -24,7 +24,6 @@ public class Condition : MonoBehaviour
     bool isSlime;
 
     public Execute execute;
-    public Movement movement;
 
     // Start is called before the first frame update
     void Start()
@@ -85,9 +84,6 @@ public class Condition : MonoBehaviour
         {
             Debug.Log(s);
         }
-
-        //Todo: 
-        movement.GetCondition(codes);
     }
 
     public ArrayList isLoop(string s)

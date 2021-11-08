@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class Movement : MonoBehaviour
@@ -21,20 +22,35 @@ public class Movement : MonoBehaviour
     public Condition condition;
     private ArrayList conditionTemp = new ArrayList();
 
-    private void Awake()
-    {
-        
-        //condition.generateCodeBlocks();
-    }
+    //Todo: 下面是condition嫁过来的，测试用。。。
+    private GameObject conditionIf; //if的面板
+    private GameObject conditionElse; //else的面板
+    public Dropdown conditionDropdown; //条件选择下拉菜单
+    //public int option;
+
+    public ArrayList codes = new ArrayList();//if执行得到的数组
+    public ArrayList test = new ArrayList();
+
+    private ArrayList ifCodeBlockTags = new ArrayList();
+    private ArrayList elseCodeBlockTags = new ArrayList();
+
+    string ifBlock;
+    string elseBlock;
+
+    bool isGem;
+    bool isSlime;
+
+    public Execute execute;
+    //Todo: 淦..............................................................
 
     void Start()
     {
         received = null;
         dogBehaviour = GetComponent<Animator>();
 
-        GameObject ifElseCode = new GameObject();
+/*        GameObject ifElseCode = new GameObject();
         ifElseCode.AddComponent<Condition>();
-        condition = (Condition)ifElseCode.GetComponent(typeof(Condition));
+        condition = (Condition)ifElseCode.GetComponent(typeof(Condition));*/
     }
 
     void Update()
@@ -59,15 +75,17 @@ public class Movement : MonoBehaviour
         {
             if (s.Equals("if"))
             {
+                test = new ArrayList();
                 //condition.generateCodeBlocks();
                 //GameObject.FindGameObjectWithTag("If").SendMessage("generateCodeBlocks");
+                test.AddRange(ConditionBlocks());
                 Debug.Log("Before");
-                condition.getCodeBlocks();
+                //condition.getCodeBlocks();
                 yield return new WaitForSeconds(0.1f);
                 //conditionTemp.Add("Attack");
-                conditionTemp.AddRange(condition.getCodeBlocks());
+                //conditionTemp.AddRange(condition.getCodeBlocks());
                 
-                foreach (string x in conditionTemp)
+                foreach (string x in test)
                 {
                     Move(x);
                     Debug.Log(x);
@@ -80,6 +98,7 @@ public class Movement : MonoBehaviour
                     dogBehaviour.SetBool("isOpen", false);
                     dogBehaviour.SetBool("isAttack", false);
                 }
+
             }
             else
             {
@@ -154,9 +173,73 @@ public class Movement : MonoBehaviour
         received.AddRange(codes);
     }
 
-    public void GetCondition(ArrayList codes)
+    public ArrayList ConditionBlocks()
     {
-        conditionTemp = new ArrayList();
-        conditionTemp.AddRange(codes);
+        codes = new ArrayList();
+        conditionIf = GameObject.FindGameObjectWithTag("SubCondition");
+        conditionElse = GameObject.FindGameObjectWithTag("SubConditionElse");
+        //conditionDropdown = GameObject.Find("ConditionDropdown").GetComponent<Dropdown>();
+        //Todo: 这个下拉栏可能设置成private就ok了，明日搞
+
+        isGem = GameObject.FindGameObjectWithTag("Gem").GetComponent<CollectGem>().isGem;
+        isSlime = GameObject.FindGameObjectWithTag("Slime").GetComponent<Attack>().isSlime;
+
+        int option = conditionDropdown.value;//下拉菜单的选项，0是史莱姆，1是宝石
+        //option = 0;
+
+        ifBlock = conditionIf.transform.GetChild(0).tag;
+        elseBlock = conditionElse.transform.GetChild(0).tag;
+
+        //判断框里是不是循环 都直接用数组存算了，好回传
+        ifCodeBlockTags.AddRange(isLoop(ifBlock));
+        elseCodeBlockTags.AddRange(isLoop(elseBlock));
+
+        if (option == 0)
+        {
+            if (isSlime && !isGem)
+            {
+                codes.AddRange(ifCodeBlockTags);
+            }
+            else if (!isSlime && isGem)
+            {
+                codes.AddRange(elseCodeBlockTags);
+            }
+        }
+        else
+        {
+            if (!isSlime && isGem)
+            {
+                codes.AddRange(elseCodeBlockTags);
+            }
+            else if (isSlime && !isGem)
+            {
+                codes.AddRange(ifCodeBlockTags);
+            }
+        }
+
+        isSlime = false;
+        isGem = false;
+
+        return codes;
+    }
+
+    public ArrayList isLoop(string s)
+    {
+        ArrayList temp = new ArrayList();
+
+        if (s.Equals("Loop"))
+        {
+            temp.AddRange(execute.LoopArray());
+        }
+        else if (s.Equals("SubLoop"))
+        {
+            temp.AddRange(execute.SubLoopArray());
+        }
+        else
+        {
+            temp.Add(s);
+        }
+
+        return temp;
     }
 }
