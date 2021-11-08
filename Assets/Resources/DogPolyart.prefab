@@ -2165,7 +2165,7 @@ Animation:
   m_GameObject: {fileID: 5744913769495343603}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: f0c8c1d913b359a428b42d53947d3e93, type: 2}
+  m_Animation: {fileID: 0}
   m_Animations: []
   m_WrapMode: 0
   m_PlayAutomatically: 1
@@ -2185,6 +2185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canCollect: 0
   canOPen: 0
+  canAttack: 0
 --- !u!1 &5744913769495343605
 GameObject:
   m_ObjectHideFlags: 0
