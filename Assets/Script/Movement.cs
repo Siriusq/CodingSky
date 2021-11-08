@@ -191,11 +191,11 @@ public class Movement : MonoBehaviour
         {
             if (!isSlime && isGem)
             {
-                codes.AddRange(elseCodeBlockTags);
+                codes.AddRange(ifCodeBlockTags);
             }
             else if (isSlime && !isGem)
             {
-                codes.AddRange(ifCodeBlockTags);
+                codes.AddRange(elseCodeBlockTags);
             }
         }
 
