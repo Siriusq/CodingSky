@@ -19,10 +19,7 @@ public class Movement : MonoBehaviour
     public bool canOPen = false;
     public bool canAttack = false;
 
-    public Condition condition;
-    private ArrayList conditionTemp = new ArrayList();
-
-    //Todo: 下面是condition嫁过来的，测试用。。。
+    //下面是给if else的
     private GameObject conditionIf; //if的面板
     private GameObject conditionElse; //else的面板
     private Dropdown conditionDropdown; //条件选择下拉菜单
@@ -30,26 +27,17 @@ public class Movement : MonoBehaviour
     public ArrayList codes = new ArrayList();//if执行得到的数组
     public ArrayList conditionBlockList = new ArrayList();//其实和上面一样的东西，但是不这么搞有报错
 
-    private ArrayList ifCodeBlockTags = new ArrayList();
-    private ArrayList elseCodeBlockTags = new ArrayList();
-
+    private ArrayList ifCodeBlockTags = new ArrayList();//if中的代码
+    private ArrayList elseCodeBlockTags = new ArrayList();//else中的代码
     string ifBlock;
     string elseBlock;
-
     bool isGem;
     bool isSlime;
-
-    public Execute execute;
-    //Todo: 淦..............................................................
 
     void Start()
     {
         received = null;
         dogBehaviour = GetComponent<Animator>();
-
-/*        GameObject ifElseCode = new GameObject();
-        ifElseCode.AddComponent<Condition>();
-        condition = (Condition)ifElseCode.GetComponent(typeof(Condition));*/
     }
 
     void Update()
@@ -64,7 +52,6 @@ public class Movement : MonoBehaviour
         {
             StopCoroutine(ExecuteBlocks());
         }
-
     }
 
     IEnumerator ExecuteBlocks()
@@ -75,22 +62,14 @@ public class Movement : MonoBehaviour
             if (s.Equals("if"))
             {
                 conditionBlockList = new ArrayList();
-                conditionBlockList.AddRange(ConditionBlocks());
-                Debug.Log("Before");                
-                yield return new WaitForSeconds(0.1f);
-                
+                conditionBlockList.AddRange(ConditionBlocks());             
+                yield return new WaitForSeconds(0.1f);                
                 foreach (string x in conditionBlockList)
                 {
                     Move(x);
                     Debug.Log(x);
                     yield return new WaitForSeconds(1.5f);
-                    dogBehaviour.SetBool("isMove", false);
-                    canCollect = false;
-                    canOPen = false;
-                    canAttack = false;
-                    dogBehaviour.SetBool("isCollecting", false);
-                    dogBehaviour.SetBool("isOpen", false);
-                    dogBehaviour.SetBool("isAttack", false);
+                    boolControl();
                 }
             }
             else
@@ -98,13 +77,7 @@ public class Movement : MonoBehaviour
                 Move(s);
                 Debug.Log(s);
                 yield return new WaitForSeconds(1.5f);
-                dogBehaviour.SetBool("isMove", false);
-                canCollect = false;
-                canOPen = false;
-                canAttack = false;
-                dogBehaviour.SetBool("isCollecting", false);
-                dogBehaviour.SetBool("isOpen", false);
-                dogBehaviour.SetBool("isAttack", false);
+                boolControl();
             }          
             
         }
@@ -112,7 +85,18 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(1);        
     }
 
-    public void Move(string x)
+    public void boolControl()
+    {
+        dogBehaviour.SetBool("isMove", false);
+        canCollect = false;
+        canOPen = false;
+        canAttack = false;
+        dogBehaviour.SetBool("isCollecting", false);
+        dogBehaviour.SetBool("isOpen", false);
+        dogBehaviour.SetBool("isAttack", false);
+    }
+
+    public void Move(string x)//狗狗动作代码
     {                
         if (x.Equals("MoveForward"))
         {
@@ -157,9 +141,11 @@ public class Movement : MonoBehaviour
         received.AddRange(codes);
     }
 
-    public ArrayList ConditionBlocks()
+    public ArrayList ConditionBlocks()//判断执行if还是else的代码
     {
         codes = new ArrayList();
+        ifCodeBlockTags = new ArrayList();
+        elseCodeBlockTags = new ArrayList();
         conditionIf = GameObject.FindGameObjectWithTag("SubCondition");
         conditionElse = GameObject.FindGameObjectWithTag("SubConditionElse");
         conditionDropdown = GameObject.FindGameObjectWithTag("ConditionDropdown").GetComponent<Dropdown>();
@@ -172,7 +158,7 @@ public class Movement : MonoBehaviour
         ifBlock = conditionIf.transform.GetChild(0).tag;
         elseBlock = conditionElse.transform.GetChild(0).tag;
 
-        //判断框里是不是循环 都直接用数组存算了，好回传
+        //判断框里是不是循环 都直接用数组存了，好回传
         ifCodeBlockTags.AddRange(isLoop(ifBlock));
         elseCodeBlockTags.AddRange(isLoop(elseBlock));
 
@@ -211,11 +197,11 @@ public class Movement : MonoBehaviour
 
         if (s.Equals("Loop"))//有循环就把循环加到数组
         {
-            temp.AddRange(execute.LoopArray());
+            temp.AddRange(Execute.LoopBlockTags);
         }
         else if (s.Equals("SubLoop"))//有子循环就把子循环加到数组
         {
-            temp.AddRange(execute.SubLoopArray());
+            temp.AddRange(Execute.SubLoopBlockTags);
         }
         else
         {

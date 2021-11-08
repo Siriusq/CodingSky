@@ -7,7 +7,6 @@ public class CollectGem : MonoBehaviour
 {
     public int gemsCount = 0;//宝石计数器
     bool collect;
-
     public bool isGem = false;//If模组中用来判断前面是不是宝石的布尔
 
     public void OnTriggerStay(Collider gemCollider)//当玩家在宝石碰撞体里停留时
