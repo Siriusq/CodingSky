@@ -5,11 +5,9 @@ using UnityEngine.UI;
 
 public class Condition : MonoBehaviour
 {
-    //Todo: 其实循环也应该单独提出来？
     private GameObject conditionIf; //if的面板
     private GameObject conditionElse; //else的面板
-    public Dropdown conditionDropdown; //条件选择下拉菜单
-    public int option;
+    private Dropdown conditionDropdown; //条件选择下拉菜单
 
     public ArrayList codes = new ArrayList();//if执行得到的数组
     public ArrayList test = new ArrayList();
@@ -37,18 +35,17 @@ public class Condition : MonoBehaviour
         
     }
 
-    public void generateCodeBlocks()
+    public ArrayList generateCodeBlocks()
     {
         codes = null;
         conditionIf = GameObject.FindGameObjectWithTag("SubCondition");
         conditionElse = GameObject.FindGameObjectWithTag("SubConditionElse");
-        //conditionDropdown = GameObject.Find("ConditionDropdown").GetComponent<Dropdown>();
+        conditionDropdown = GameObject.FindGameObjectWithTag("ConditionDropdown").GetComponent<Dropdown>();
 
         isGem = GameObject.FindGameObjectWithTag("Gem").GetComponent<CollectGem>().isGem;
         isSlime = GameObject.FindGameObjectWithTag("Slime").GetComponent<Attack>().isSlime;
 
-        //option = conditionDropdown.value;//下拉菜单的选项，0是史莱姆，1是宝石
-        option = 0;
+        int option = conditionDropdown.value;//下拉菜单的选项，0是史莱姆，1是宝石
 
         ifBlock = conditionIf.transform.GetChild(0).tag;
         elseBlock = conditionElse.transform.GetChild(0).tag;
@@ -80,10 +77,10 @@ public class Condition : MonoBehaviour
             }
         }
 
-        foreach(string s in codes)
-        {
-            Debug.Log(s);
-        }
+        isSlime = false;
+        isGem = false;
+
+        return codes;
     }
 
     public ArrayList isLoop(string s)

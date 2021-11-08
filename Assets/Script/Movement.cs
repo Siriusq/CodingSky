@@ -25,11 +25,10 @@ public class Movement : MonoBehaviour
     //Todo: 下面是condition嫁过来的，测试用。。。
     private GameObject conditionIf; //if的面板
     private GameObject conditionElse; //else的面板
-    public Dropdown conditionDropdown; //条件选择下拉菜单
-    //public int option;
+    private Dropdown conditionDropdown; //条件选择下拉菜单
 
     public ArrayList codes = new ArrayList();//if执行得到的数组
-    public ArrayList test = new ArrayList();
+    public ArrayList conditionBlockList = new ArrayList();//其实和上面一样的东西，但是不这么搞有报错
 
     private ArrayList ifCodeBlockTags = new ArrayList();
     private ArrayList elseCodeBlockTags = new ArrayList();
@@ -75,17 +74,12 @@ public class Movement : MonoBehaviour
         {
             if (s.Equals("if"))
             {
-                test = new ArrayList();
-                //condition.generateCodeBlocks();
-                //GameObject.FindGameObjectWithTag("If").SendMessage("generateCodeBlocks");
-                test.AddRange(ConditionBlocks());
-                Debug.Log("Before");
-                //condition.getCodeBlocks();
+                conditionBlockList = new ArrayList();
+                conditionBlockList.AddRange(ConditionBlocks());
+                Debug.Log("Before");                
                 yield return new WaitForSeconds(0.1f);
-                //conditionTemp.Add("Attack");
-                //conditionTemp.AddRange(condition.getCodeBlocks());
                 
-                foreach (string x in test)
+                foreach (string x in conditionBlockList)
                 {
                     Move(x);
                     Debug.Log(x);
@@ -98,7 +92,6 @@ public class Movement : MonoBehaviour
                     dogBehaviour.SetBool("isOpen", false);
                     dogBehaviour.SetBool("isAttack", false);
                 }
-
             }
             else
             {
@@ -120,18 +113,12 @@ public class Movement : MonoBehaviour
     }
 
     public void Move(string x)
-    {
-        //transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-                
+    {                
         if (x.Equals("MoveForward"))
         {
             dogBehaviour.SetBool("isMove", true);
             destination = this.transform.position + transform.forward;
             Tweener tweener = transform.DOMove(destination, 1);
-            //this.transform.position = Vector3.MoveTowards(this.transform.position, this.transform.position + transform.forward, speed * Time.deltaTime);
-            //Debug.Log(Time.deltaTime);
-            //this.transform.position = Vector3.SmoothDamp(this.transform.position, this.transform.position + transform.forward, ref currentVelocity, 0.1f);
-            //this.transform.position = Vector3.Lerp(this.transform.position, this.transform.position + transform.forward, speed * Time.deltaTime);
         }
         else if (x.Equals("TurnLeft"))
         {
@@ -139,7 +126,6 @@ public class Movement : MonoBehaviour
             direction = transform.forward;
             direction.y -= 90;
             Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);
-            //this.transform.Rotate(leftRotation);
         }
         else if (x.Equals("TurnRight"))
         {
@@ -147,7 +133,6 @@ public class Movement : MonoBehaviour
             direction = transform.forward;
             direction.y += 90;
             Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);
-            //this.transform.Rotate(rightRotation);
         }
         else if (x.Equals("Collect"))
         {
@@ -163,8 +148,7 @@ public class Movement : MonoBehaviour
         {
             dogBehaviour.SetBool("isOpen", true);
             canOPen = true;
-        }       
-        
+        }               
     }
 
     public void GetCode(ArrayList codes)
@@ -178,14 +162,12 @@ public class Movement : MonoBehaviour
         codes = new ArrayList();
         conditionIf = GameObject.FindGameObjectWithTag("SubCondition");
         conditionElse = GameObject.FindGameObjectWithTag("SubConditionElse");
-        //conditionDropdown = GameObject.Find("ConditionDropdown").GetComponent<Dropdown>();
-        //Todo: 这个下拉栏可能设置成private就ok了，明日搞
+        conditionDropdown = GameObject.FindGameObjectWithTag("ConditionDropdown").GetComponent<Dropdown>();
 
         isGem = GameObject.FindGameObjectWithTag("Gem").GetComponent<CollectGem>().isGem;
         isSlime = GameObject.FindGameObjectWithTag("Slime").GetComponent<Attack>().isSlime;
 
         int option = conditionDropdown.value;//下拉菜单的选项，0是史莱姆，1是宝石
-        //option = 0;
 
         ifBlock = conditionIf.transform.GetChild(0).tag;
         elseBlock = conditionElse.transform.GetChild(0).tag;
@@ -223,21 +205,21 @@ public class Movement : MonoBehaviour
         return codes;
     }
 
-    public ArrayList isLoop(string s)
+    public ArrayList isLoop(string s)// 判断if里面有没有循环或者子循环
     {
         ArrayList temp = new ArrayList();
 
-        if (s.Equals("Loop"))
+        if (s.Equals("Loop"))//有循环就把循环加到数组
         {
             temp.AddRange(execute.LoopArray());
         }
-        else if (s.Equals("SubLoop"))
+        else if (s.Equals("SubLoop"))//有子循环就把子循环加到数组
         {
             temp.AddRange(execute.SubLoopArray());
         }
         else
         {
-            temp.Add(s);
+            temp.Add(s);//没有就只加原来的命令
         }
 
         return temp;
