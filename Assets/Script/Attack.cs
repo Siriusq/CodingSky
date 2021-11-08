@@ -9,6 +9,9 @@ public class Attack : MonoBehaviour
     public int attackCount = 0;
     bool attack;
     GameObject dog;
+
+    public bool isSlime = false;// If模组中用来判断前面是啥的布尔
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +28,7 @@ public class Attack : MonoBehaviour
     {
         if (attackCollider.tag == "Player")
         {
-            //Tweener tweener = transform.DOMove(this.transform.position - transform.up, 1.5f);
-            //Tweener up = transform.DOMove(this.transform.position + transform.up, 0.5f);
+            isSlime = true;
         }
         
     }
@@ -53,6 +55,8 @@ public class Attack : MonoBehaviour
             Tweener tweener = transform.DOMove(this.transform.position - transform.up, 1.5f);
             // Todo: 有空可以加攻击动画
             //Tweener tweener = transform.DOMove(this.transform.position + transform.up, 1.5f);//顶飞狗狗之后史莱姆冒头
+
+            isSlime = false;
         }
     }
 

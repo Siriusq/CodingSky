@@ -7,31 +7,34 @@ public class Movement : MonoBehaviour
 {
     Animator dogBehaviour;
 
-    public ArrayList received = new ArrayList();
-    bool readin = false;
-    bool finished = false;
+    public ArrayList received = new ArrayList();//按下开始按钮后接收到的指令组
+    bool readin = false;//指示读取是否完成
+    bool finished = false;//指示执行是否完成
 
-    Vector3 leftRotation = new Vector3(0, -90, 0);
-    Vector3 rightRotation = new Vector3(0, 90, 0);
+    Vector3 destination;//移动到目的地
+    Vector3 direction;//移动的方向
 
-    Vector3 nextPos;
-    Vector3 destination;
-    Vector3 direction;
-
-    float speed = 500f;
-    float rayLength = 1f;
-    Vector3 currentVelocity = Vector3.zero;
-    float smoothTime = 3F;
-
-    bool canMove;
     public bool canCollect = false;
     public bool canOPen = false;
     public bool canAttack = false;
+
+    public Condition condition;
+    private ArrayList conditionTemp = new ArrayList();
+
+    private void Awake()
+    {
+        
+        //condition.generateCodeBlocks();
+    }
 
     void Start()
     {
         received = null;
         dogBehaviour = GetComponent<Animator>();
+
+        GameObject ifElseCode = new GameObject();
+        ifElseCode.AddComponent<Condition>();
+        condition = (Condition)ifElseCode.GetComponent(typeof(Condition));
     }
 
     void Update()
@@ -53,17 +56,45 @@ public class Movement : MonoBehaviour
     {
         Debug.Log("Start");
         foreach (string s in received)
-        {          
-            Move(s);
-            Debug.Log(s);            
-            yield return new WaitForSeconds(1.5f);
-            dogBehaviour.SetBool("isMove", false);
-            canCollect = false;
-            canOPen = false;
-            canAttack = false;
-            dogBehaviour.SetBool("isCollecting", false);
-            dogBehaviour.SetBool("isOpen", false);
-            dogBehaviour.SetBool("isAttack", false);
+        {
+            if (s.Equals("if"))
+            {
+                //condition.generateCodeBlocks();
+                //GameObject.FindGameObjectWithTag("If").SendMessage("generateCodeBlocks");
+                Debug.Log("Before");
+                condition.getCodeBlocks();
+                yield return new WaitForSeconds(0.1f);
+                //conditionTemp.Add("Attack");
+                conditionTemp.AddRange(condition.getCodeBlocks());
+                
+                foreach (string x in conditionTemp)
+                {
+                    Move(x);
+                    Debug.Log(x);
+                    yield return new WaitForSeconds(1.5f);
+                    dogBehaviour.SetBool("isMove", false);
+                    canCollect = false;
+                    canOPen = false;
+                    canAttack = false;
+                    dogBehaviour.SetBool("isCollecting", false);
+                    dogBehaviour.SetBool("isOpen", false);
+                    dogBehaviour.SetBool("isAttack", false);
+                }
+            }
+            else
+            {
+                Move(s);
+                Debug.Log(s);
+                yield return new WaitForSeconds(1.5f);
+                dogBehaviour.SetBool("isMove", false);
+                canCollect = false;
+                canOPen = false;
+                canAttack = false;
+                dogBehaviour.SetBool("isCollecting", false);
+                dogBehaviour.SetBool("isOpen", false);
+                dogBehaviour.SetBool("isAttack", false);
+            }          
+            
         }
         finished = true;
         yield return new WaitForSeconds(1);        
@@ -113,7 +144,8 @@ public class Movement : MonoBehaviour
         {
             dogBehaviour.SetBool("isOpen", true);
             canOPen = true;
-        }
+        }       
+        
     }
 
     public void GetCode(ArrayList codes)
@@ -122,18 +154,9 @@ public class Movement : MonoBehaviour
         received.AddRange(codes);
     }
 
-    bool Valid()
+    public void GetCondition(ArrayList codes)
     {
-        Ray myRay = new Ray(transform.position + new Vector3(0, 0.25f, 0), transform.forward);
-        RaycastHit hit;
-
-        if (Physics.Raycast(myRay, out hit, rayLength))
-        {
-            if (hit.collider.tag == "Gem")
-            {
-                return false;
-            }
-        }
-        return true;
+        conditionTemp = new ArrayList();
+        conditionTemp.AddRange(codes);
     }
 }

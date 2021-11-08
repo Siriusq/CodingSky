@@ -1028,7 +1028,7 @@ GameObject:
   - component: {fileID: 9062790562767058536}
   m_Layer: 7
   m_Name: TurtleShell
-  m_TagString: Turtle
+  m_TagString: Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1108,6 +1108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCount: 0
+  isSlime: 0
 --- !u!1 &146196627336876622
 GameObject:
   m_ObjectHideFlags: 0
