@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
 {
     Animator dogBehaviour;
 
-    public ArrayList received = new ArrayList();//按下开始按钮后接收到的指令组
+    ArrayList received = new ArrayList();//按下开始按钮后接收到的指令组
     bool readin = false;//指示读取是否完成
     bool finished = false;//指示执行是否完成
 
@@ -20,15 +20,15 @@ public class Movement : MonoBehaviour
     public bool canAttack = false;
 
     //下面是给if else的
-    private GameObject conditionIf; //if的面板
-    private GameObject conditionElse; //else的面板
-    private Dropdown conditionDropdown; //条件选择下拉菜单
+    GameObject conditionIf; //if的面板
+    GameObject conditionElse; //else的面板
+    Dropdown conditionDropdown; //条件选择下拉菜单
 
-    public ArrayList codes = new ArrayList();//if执行得到的数组
-    public ArrayList conditionBlockList = new ArrayList();//其实和上面一样的东西，但是不这么搞有报错
+    ArrayList codes = new ArrayList();//if执行得到的数组
+    ArrayList conditionBlockList = new ArrayList();//其实和上面一样的东西，但是不这么搞有报错
 
-    private ArrayList ifCodeBlockTags = new ArrayList();//if中的代码
-    private ArrayList elseCodeBlockTags = new ArrayList();//else中的代码
+    ArrayList ifCodeBlockTags = new ArrayList();//if中的代码
+    ArrayList elseCodeBlockTags = new ArrayList();//else中的代码
     string ifBlock;
     string elseBlock;
     bool isGem;
@@ -85,7 +85,7 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(1);        
     }
 
-    public void boolControl()
+    private void boolControl()
     {
         dogBehaviour.SetBool("isMove", false);
         canCollect = false;
@@ -96,7 +96,7 @@ public class Movement : MonoBehaviour
         dogBehaviour.SetBool("isAttack", false);
     }
 
-    public void Move(string x)//狗狗动作代码
+    private void Move(string x)//狗狗动作代码
     {                
         if (x.Equals("MoveForward"))
         {
@@ -141,7 +141,7 @@ public class Movement : MonoBehaviour
         received.AddRange(codes);
     }
 
-    public ArrayList ConditionBlocks()//判断执行if还是else的代码
+    private ArrayList ConditionBlocks()//判断执行if还是else的代码
     {
         codes = new ArrayList();
         ifCodeBlockTags = new ArrayList();
@@ -150,8 +150,8 @@ public class Movement : MonoBehaviour
         conditionElse = GameObject.FindGameObjectWithTag("SubConditionElse");
         conditionDropdown = GameObject.FindGameObjectWithTag("ConditionDropdown").GetComponent<Dropdown>();
 
-        isGem = GameObject.FindGameObjectWithTag("Gem").GetComponent<CollectGem>().isGem;
-        isSlime = GameObject.FindGameObjectWithTag("Slime").GetComponent<Attack>().isSlime;
+        isGem = GameObject.FindGameObjectWithTag("Gem").GetComponent<CollectGem>().IsGem;
+        isSlime = GameObject.FindGameObjectWithTag("Slime").GetComponent<Attack>().IsSlime;
 
         int option = conditionDropdown.value;//下拉菜单的选项，0是史莱姆，1是宝石
 
@@ -191,7 +191,7 @@ public class Movement : MonoBehaviour
         return codes;
     }
 
-    public ArrayList isLoop(string s)// 判断if里面有没有循环或者子循环
+    private ArrayList isLoop(string s)// 判断if里面有没有循环或者子循环
     {
         ArrayList temp = new ArrayList();
 

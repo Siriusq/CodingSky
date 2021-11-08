@@ -7,7 +7,8 @@ public class CollectGem : MonoBehaviour
 {
     public int gemsCount = 0;//宝石计数器
     bool collect;
-    public bool isGem = false;//If模组中用来判断前面是不是宝石的布尔
+    bool isGem = false;//If模组中用来判断前面是不是宝石的布尔
+    public bool IsGem => isGem;
 
     public void OnTriggerStay(Collider gemCollider)//当玩家在宝石碰撞体里停留时
     {
@@ -38,17 +39,5 @@ public class CollectGem : MonoBehaviour
         {
             isGem = false;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

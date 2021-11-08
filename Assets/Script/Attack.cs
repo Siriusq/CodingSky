@@ -10,7 +10,8 @@ public class Attack : MonoBehaviour
     bool attack;
     GameObject dog;
 
-    public bool isSlime = false;// If模组中用来判断前面是啥的布尔
+    bool isSlime = false;// If模组中用来判断前面是啥的布尔
+    public bool IsSlime => isSlime;
 
     // Start is called before the first frame update
     void Start()

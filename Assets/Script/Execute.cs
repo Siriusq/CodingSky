@@ -6,19 +6,20 @@ using UnityEngine.UI;
 
 public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    private GameObject executePanel;// 执行面板
-    public ArrayList codeBlockTags = new ArrayList(); // 存储执行面版内命令的数组
+    GameObject executePanel;// 执行面板
+    static ArrayList codeBlockTags = new ArrayList(); // 存储执行面版内命令的数组
+    public static ArrayList CodeBlockTags => codeBlockTags;
 
     public Slider loopCountSlider;// 调整循环次数的滑块
-    private GameObject loopPanel; // 循环面板
-    private int loopTime; // 循环次数
-    private static ArrayList loopBlockTags = new ArrayList(); // 存储主循环面版内命令的数组
+    GameObject loopPanel; // 循环面板
+    int loopTime; // 循环次数
+    static ArrayList loopBlockTags = new ArrayList(); // 存储主循环面版内命令的数组
     public static ArrayList LoopBlockTags => loopBlockTags;
 
     public Slider subLoopCountSlider;// 调整子循环次数的滑块
-    private GameObject subLoopPanel; // 子循环面板
-    private int subLoopTime; // 子循环次数
-    private static ArrayList subLoopBlockTags = new ArrayList(); // 存储子循环面版内命令的数组
+    GameObject subLoopPanel; // 子循环面板
+    int subLoopTime; // 子循环次数
+    static ArrayList subLoopBlockTags = new ArrayList(); // 存储子循环面版内命令的数组
     public static ArrayList SubLoopBlockTags => subLoopBlockTags;
 
     public Dropdown conditionDropdown; //条件选择下拉菜单
