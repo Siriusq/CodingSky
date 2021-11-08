@@ -8,36 +8,23 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     GameObject executePanel;// 执行面板
     static ArrayList codeBlockTags = new ArrayList(); // 存储执行面版内命令的数组
-    public static ArrayList CodeBlockTags => codeBlockTags;
+    public static ArrayList CodeBlockTags => codeBlockTags;//getter
 
     public Slider loopCountSlider;// 调整循环次数的滑块
     GameObject loopPanel; // 循环面板
     int loopTime; // 循环次数
     static ArrayList loopBlockTags = new ArrayList(); // 存储主循环面版内命令的数组
-    public static ArrayList LoopBlockTags => loopBlockTags;
+    public static ArrayList LoopBlockTags => loopBlockTags;//getter
 
     public Slider subLoopCountSlider;// 调整子循环次数的滑块
     GameObject subLoopPanel; // 子循环面板
     int subLoopTime; // 子循环次数
     static ArrayList subLoopBlockTags = new ArrayList(); // 存储子循环面版内命令的数组
-    public static ArrayList SubLoopBlockTags => subLoopBlockTags;
+    public static ArrayList SubLoopBlockTags => subLoopBlockTags;//getter
 
     public Dropdown conditionDropdown; //条件选择下拉菜单
 
     public Movement player;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnPointerDown(PointerEventData eventData)
     {

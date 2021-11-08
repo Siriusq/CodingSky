@@ -6,72 +6,52 @@ using DG.Tweening;
 public class Attack : MonoBehaviour
 {
     Animator attacking;
-    public int attackCount = 0;
+    public static int attackCount = 0;
     bool attack;
     GameObject dog;
+    public static bool isSlime = false;// If模组中用来判断前面是啥的布尔
 
-    bool isSlime = false;// If模组中用来判断前面是啥的布尔
-    public bool IsSlime => isSlime;
-
-    // Start is called before the first frame update
     void Start()
     {
         attacking = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void OnTriggerEnter(Collider attackCollider)
+    void OnTriggerEnter(Collider attackCollider)
     {
         if (attackCollider.tag == "Player")
         {
             isSlime = true;
-        }
-        
+        }        
     }
 
-    public void OnTriggerStay(Collider stay)
+    void OnTriggerStay(Collider stay)
     {
         attack = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>().canAttack;
         if(stay.tag.Equals("Player") && attack)
         {
-            attackCount++;
-            
             StartCoroutine(AttackWait());
             attack = false;
-
-
             StopCoroutine(AttackWait());
         }
     }
 
-    public void OnTriggerExit(Collider leave)
+    void OnTriggerExit(Collider leave)
     {
         if (leave.tag == "Player")
         {
             Tweener tweener = transform.DOMove(this.transform.position - transform.up, 1.5f);
-            // Todo: 有空可以加攻击动画
-            //Tweener tweener = transform.DOMove(this.transform.position + transform.up, 1.5f);//顶飞狗狗之后史莱姆冒头
-
             isSlime = false;
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
-        StartCoroutine(Wait());
-        
+        StartCoroutine(Wait());        
         StopCoroutine(Wait());
     }
 
-    public void OnCollisionExit(Collision collision)
+    void OnCollisionExit(Collision collision)
     {
-
-        //Tweener tweener = transform.DOMove(this.transform.position + transform.up, 1.5f);//顶飞狗狗之后史莱姆冒头
 
     }
 
@@ -92,5 +72,7 @@ public class Attack : MonoBehaviour
         attacking.SetBool("GotHit", true);
         yield return new WaitForSeconds(1.2f);
         Destroy(gameObject);
+        attackCount++;
+        Debug.Log("Attack: " + attackCount);
     }
 }

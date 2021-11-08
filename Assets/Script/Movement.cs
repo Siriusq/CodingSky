@@ -67,7 +67,7 @@ public class Movement : MonoBehaviour
                 foreach (string x in conditionBlockList)
                 {
                     Move(x);
-                    Debug.Log(x);
+                    Debug.Log("if " + x);
                     yield return new WaitForSeconds(1.5f);
                     boolControl();
                 }
@@ -150,8 +150,8 @@ public class Movement : MonoBehaviour
         conditionElse = GameObject.FindGameObjectWithTag("SubConditionElse");
         conditionDropdown = GameObject.FindGameObjectWithTag("ConditionDropdown").GetComponent<Dropdown>();
 
-        isGem = GameObject.FindGameObjectWithTag("Gem").GetComponent<CollectGem>().IsGem;
-        isSlime = GameObject.FindGameObjectWithTag("Slime").GetComponent<Attack>().IsSlime;
+        isGem = CollectGem.isGem;
+        isSlime = Attack.isSlime;
 
         int option = conditionDropdown.value;//下拉菜单的选项，0是史莱姆，1是宝石
 
