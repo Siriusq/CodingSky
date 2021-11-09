@@ -85,17 +85,6 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(1);        
     }
 
-    IEnumerator Highlight()
-    {
-
-        yield return new WaitForSeconds(1);
-    }
-
-    void HighLightBlocks()
-    {
-
-    }
-
     private void boolControl()
     {
         dogBehaviour.SetBool("isMove", false);
