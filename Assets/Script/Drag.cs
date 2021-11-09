@@ -103,6 +103,28 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             prefab = null;
         }
 
+        //防止执行面板图标溢出
+        if (this.transform.parent.CompareTag("execute_panel") && this.transform.parent.childCount > 29){
+            Destroy(this.gameObject);
+            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+        }
+
+        //防止循环面板图标溢出
+        if (this.transform.parent.CompareTag("LoopPanel") && this.transform.parent.childCount > 15)
+        {
+            Destroy(this.gameObject);
+            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+        }
+
+        //防止子循环面板图标溢出
+        if (this.transform.parent.CompareTag("SubLoopPanel") && this.transform.parent.childCount > 8)
+        {
+            Destroy(this.gameObject);
+            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+        }
+
+
+
         // if 面板托盘中的判断
         if (this.transform.parent.CompareTag("SubCondition"))
         {
@@ -117,36 +139,42 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             else if(this.transform.parent.childCount > 2)
             {
                 DestroyImmediate(this.transform.parent.GetChild(2).gameObject);
-            }            
+                // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+            }
         }
 
         //防止用户把循环代码块拖到自己的循环里去
         if (this.transform.parent.CompareTag("LoopPanel") && this.transform.tag.Equals("Loop"))
         {
             Destroy(this.gameObject);
+            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
         }
 
         //防止用户把if拖动到循环里去
         if (this.transform.parent.CompareTag("LoopPanel") && this.transform.tag.Equals("If"))
         {
             Destroy(this.gameObject);
+            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
         }
 
         //防止用户把if拖动到子循环里去
         if (this.transform.parent.CompareTag("SubLoopPanel") && this.transform.tag.Equals("If"))
         {
             Destroy(this.gameObject);
+            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
         }
 
         //防止用户把循环代码块拖到自己的循环里去 + 防止用户把主循环拖到子循环里去
         if (this.transform.parent.CompareTag("SubLoopPanel") && (this.transform.tag.Equals("Loop") || this.transform.tag.Equals("SubLoop")))
         {
             Destroy(this.gameObject);
+            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
         }
 
         //删除拖动的物体
         if (this.transform.parent.CompareTag("Delete")){
             Destroy(this.gameObject);
+            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
         }
 
         GetComponent<CanvasGroup>().blocksRaycasts = true;//拖拽结束时恢复UI拦截
