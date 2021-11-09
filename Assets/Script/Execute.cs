@@ -25,6 +25,9 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public Dropdown conditionDropdown; //条件选择下拉菜单
 
     public Movement player;
+    public HighLightButton highLight;
+
+    public static ArrayList highlightButtons = new ArrayList();// 高亮顺序数组
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -40,31 +43,35 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         if (childCount != 0)
         {
             // Todo: 可以给运行到的代码块的高亮，不过应该加在人物移动那里
+            // 先把对应的块加到数组里
             foreach (Transform block in executePanel.transform)//遍历代码块
             {
+                highlightButtons.Add(block.tag);
+
                 if (block.tag.Equals("Loop"))// 如果出现循环代码块，就跳到循环面板里，将循环面板里的代码块按循环次数添加到数组里
                 {
-                    codeBlockTags.AddRange(loopBlockTags);
+                    codeBlockTags.AddRange(loopBlockTags);                   
                 }
                 else if (block.tag.Equals("SubLoop"))
                 {
                     codeBlockTags.AddRange(subLoopBlockTags);
                 }
-                else if (block.tag.Equals("If"))// 如果出现条件代码块，这个得想想
+                else if (block.tag.Equals("If"))
                 {
                     codeBlockTags.Add("if");
                 }
                 else//其他情况直接添加
                 {
                     codeBlockTags.Add(block.tag);
-                }                            
+                }                
             }            
         }        
     }
 
     public void OnPointerUp(PointerEventData eventData) //鼠标抬起的时候把代码命令组传到Movement里
     {
-        player.GetCode(codeBlockTags);              
+        player.GetCode(codeBlockTags);
+        HighLightButton.GetCode(highlightButtons);
     }
 
     public ArrayList LoopArray() //获取循环面板里的代码
