@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     static GameManager manager;
     public Animator transAnimation;
     public GameObject winningPanel;
+    public GameObject[] gems;
     public static bool isWin = false;
 
     void Awake()
@@ -79,6 +80,19 @@ public class GameManager : MonoBehaviour
         if(winningPanel != null)
         {
             winningPanel.SetActive(true);
+            int gemCount = 3 - GameObject.FindGameObjectsWithTag("Gem").Length;//三个宝石，减掉剩下的就是收集了的
+            if(gemCount > 2)
+            {
+                gems[2].SetActive(true);//三星
+            }
+            if (gemCount > 1)
+            {
+                gems[1].SetActive(true);//两星
+            }
+            if (gemCount > 0)
+            {
+                gems[0].SetActive(true);//一星
+            }
         }
     }
 
