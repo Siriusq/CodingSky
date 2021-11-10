@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     static GameManager manager;
     public Animator transAnimation;
+    public GameObject winningPanel;
+    public static bool isWin = false;
 
     void Awake()
     {
@@ -31,7 +33,10 @@ public class GameManager : MonoBehaviour
 
     public void Restart()//重新开始游戏
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        int tempIndex = SceneManager.GetActiveScene().buildIndex;//buildingIndex是build setting里面场景的序号
+        StartCoroutine(TransAnimation(tempIndex));
+        StopCoroutine(TransAnimation(tempIndex));
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Pause()//暂停游戏
@@ -46,9 +51,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ChooseLevel(int index)//关卡选择菜单，每个关卡块传入自己的关卡号
+    {
+        int level = index + 1;//build里面scene从0开始计数，0是main，1是选关，所以+1
+        StartCoroutine(TransAnimation(level));
+        StopCoroutine(TransAnimation(level));
+    }
+
     public void BackToMenu()//回到关卡选择页面
     {
-        SceneManager.LoadScene("Main");
+        StartCoroutine(TransAnimation(1));
+        StopCoroutine(TransAnimation(1));
     }
 
     public void SettingPanel()//打开设置
@@ -63,24 +76,26 @@ public class GameManager : MonoBehaviour
 
     public void LevelComplete()//通关页面
     {
-
+        if(winningPanel != null)
+        {
+            winningPanel.SetActive(true);
+        }
     }
 
-    public void Play()//Main Menu 上面的 Play 按钮，按下后切换到关卡选择
+    public void WarningPopup(string s)
     {
-        SceneManager.LoadScene("Select");
+
     }
 
 
     public void Continue()//加载下一关
     {
         int tempIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        Debug.Log(tempIndex);
-        StartCoroutine(NextLevel(SceneManager.GetActiveScene().buildIndex + 1));//buildingIndex是build setting里面场景的序号
-        //StopCoroutine(NextLevel(tempIndex));
+        StartCoroutine(TransAnimation(tempIndex));//buildingIndex是build setting里面场景的序号
+        StopCoroutine(TransAnimation(tempIndex));
     }
 
-    IEnumerator NextLevel(int index)//携程加载下一个场景，可以用在下一关按钮，也可以用在主菜单切换到关卡选择上
+    IEnumerator TransAnimation(int index)//携程加载下一个场景，可以用在下一关按钮，也可以用在主菜单切换到关卡选择上
     {
         transAnimation.SetTrigger("Start");
         yield return new WaitForSeconds(0.7f);

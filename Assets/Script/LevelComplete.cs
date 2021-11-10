@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class LevelComplete : MonoBehaviour
 {
+    public GameManager gameManager;
     Animator chestBehaviour;
     bool open;
 
@@ -28,7 +29,15 @@ public class LevelComplete : MonoBehaviour
         if(chestCollider.tag == "Player" && open)
         {
             chestBehaviour.SetBool("reachTreasure", true);
+            StartCoroutine(PopUpTrans());
+            StopCoroutine(PopUpTrans());
             //Todo: µ¯³öÍ¨¹Øµ¯´°
         }
+    }
+
+    IEnumerator PopUpTrans()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gameManager.LevelComplete();
     }
 }
