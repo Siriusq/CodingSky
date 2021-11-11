@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject tipsPanel;
     public Animator tipsAnimation;
 
+
     void Awake()
     {
         if(manager != null)
@@ -101,8 +102,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 volumePanel.SetActive(true);
-            }
-            
+            }            
         }
     }
 
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
                 tipsPanel.SetActive(true);
             }
         }
-    }
+    }//提示面板
 
     public void LevelComplete()//通关页面
     {
