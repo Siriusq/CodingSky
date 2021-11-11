@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public GameObject winningPanel;
     public GameObject[] gems;
     public static bool isWin = false;
+    public GameObject warningPanel;
+    public Animator messageAnimation;
 
     void Awake()
     {
@@ -94,11 +96,6 @@ public class GameManager : MonoBehaviour
                 gems[0].SetActive(true);//Ò»ÐÇ
             }
         }
-    }
-
-    public void WarningPopup(string s)
-    {
-
     }
 
 

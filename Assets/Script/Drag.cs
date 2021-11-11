@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    public GameObject messagePrefab;
+
     public Transform transformParentCache = null;//暂时存储图标原在的面板父类
 
     public Transform originalParent = null;//最开始点击的物体的父类缓存
@@ -106,21 +108,21 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         //防止执行面板图标溢出
         if (this.transform.parent.CompareTag("execute_panel") && this.transform.parent.childCount > 29){
             Destroy(this.gameObject);
-            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+            SendMessage(0);
         }
 
         //防止循环面板图标溢出
         if (this.transform.parent.CompareTag("LoopPanel") && this.transform.parent.childCount > 15)
-        {
+        {            
             Destroy(this.gameObject);
-            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+            SendMessage(1);
         }
 
         //防止子循环面板图标溢出
         if (this.transform.parent.CompareTag("SubLoopPanel") && this.transform.parent.childCount > 8)
         {
             Destroy(this.gameObject);
-            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+            SendMessage(2);
         }
 
 
@@ -133,13 +135,13 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             if (this.transform.tag.Equals("If"))
             {
                 Destroy(this.gameObject);
-                // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+                SendMessage(3);
             }
             // 如果面板中已经存在其他代码块，那么在拖动新的代码块过来之后删除原来的，这个2还是因为unity愚蠢的List计数问题
             else if(this.transform.parent.childCount > 2)
             {
                 DestroyImmediate(this.transform.parent.GetChild(2).gameObject);
-                // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+                //gameManager.WarningPopup("Conditional code block cannot be used in their own panels!");
             }
         }
 
@@ -147,37 +149,82 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (this.transform.parent.CompareTag("LoopPanel") && this.transform.tag.Equals("Loop"))
         {
             Destroy(this.gameObject);
-            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+            SendMessage(4);
         }
 
         //防止用户把if拖动到循环里去
         if (this.transform.parent.CompareTag("LoopPanel") && this.transform.tag.Equals("If"))
         {
             Destroy(this.gameObject);
-            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+            SendMessage(5);
         }
 
         //防止用户把if拖动到子循环里去
         if (this.transform.parent.CompareTag("SubLoopPanel") && this.transform.tag.Equals("If"))
         {
             Destroy(this.gameObject);
-            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+            SendMessage(5);
         }
 
         //防止用户把循环代码块拖到自己的循环里去 + 防止用户把主循环拖到子循环里去
         if (this.transform.parent.CompareTag("SubLoopPanel") && (this.transform.tag.Equals("Loop") || this.transform.tag.Equals("SubLoop")))
         {
             Destroy(this.gameObject);
-            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
+            SendMessage(6);
         }
 
         //删除拖动的物体
         if (this.transform.parent.CompareTag("Delete")){
             Destroy(this.gameObject);
-            // Todo: 可以加一个提示，检测到的时候提示不能这么干，也可以加一个音效
         }
 
         GetComponent<CanvasGroup>().blocksRaycasts = true;//拖拽结束时恢复UI拦截
         Destroy(emptyBlock);//结束时删除占位符
+    }
+
+    public void SendMessage(int i)//弹窗
+    {
+        string s = "";
+        switch (i)
+        {
+            case 0:
+                s = "The execution panel can only hold a maximum of 28 code blocks, please optimize your code logic!";
+                break;
+            case 1:
+                s = "The loop panel can only hold a maximum of 14 code blocks, please optimize your code logic!";
+                break;
+            case 2:
+                s = "The subloop panel can only hold a maximum of 7 code blocks, please optimize your code logic!";
+                break;
+            case 3:
+                s = "Conditional code block cannot be used in their own panels!";
+                break;
+            case 4:
+                s = "Cannot use a loop code block in the same loop panel!";
+                break;
+            case 5:
+                s = "Conditional code block loops are not supported at this time!";
+                break;
+            case 6:
+                s = "Cannot use a loop code block in the same loop/subloop panel!";
+                break;         
+
+        }
+
+        StartCoroutine(WaitMessage(s));
+        StopCoroutine(WaitMessage(s));
+        GameObject[] usedMessage = GameObject.FindGameObjectsWithTag("Warning");//销毁弹窗
+        foreach(GameObject message in usedMessage)
+        {
+            Destroy(message,4.5f);
+        }
+    }
+
+    IEnumerator WaitMessage(string s)//实例化弹窗，然后播放动画
+    {
+        var message = Instantiate(messagePrefab);
+        Text t = message.GetComponentInChildren<Text>();
+        t.text = s;
+        yield return new WaitForSeconds(2f);
     }
 }

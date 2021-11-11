@@ -29,9 +29,10 @@ public class LevelComplete : MonoBehaviour
         if(chestCollider.tag == "Player" && open)
         {
             chestBehaviour.SetBool("reachTreasure", true);
+            // 弹出通关弹窗
             StartCoroutine(PopUpTrans());
             StopCoroutine(PopUpTrans());
-            //Todo: 弹出通关弹窗
+            
         }
     }
 

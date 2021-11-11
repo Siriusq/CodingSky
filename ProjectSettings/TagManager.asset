@@ -28,6 +28,7 @@ TagManager:
   - Gem
   - Slime
   - Turtle
+  - Warning
   layers:
   - Default
   - TransparentFX
