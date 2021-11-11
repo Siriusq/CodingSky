@@ -13,6 +13,12 @@ public class GameManager : MonoBehaviour
     public static bool isWin = false;
     public GameObject warningPanel;
     public Animator messageAnimation;
+    public GameObject volumePanel;
+    public Animator volumeAnimation;
+    public GameObject settingPanel;
+    public Animator settingAnimation;
+    public GameObject tipsPanel;
+    public Animator tipsAnimation;
 
     void Awake()
     {
@@ -69,12 +75,51 @@ public class GameManager : MonoBehaviour
 
     public void SettingPanel()//打开设置
     {
-
+        if (settingPanel != null)
+        {
+            if(settingPanel.activeSelf == true)
+            {                
+                StartCoroutine(SettingWaitSeconds());
+                StopCoroutine(SettingWaitSeconds());
+            }
+            else
+            {
+                settingPanel.SetActive(true);
+            }
+        }
     }
 
     public void VolumePanel()//打开音量控制
     {
+        if (volumePanel != null)
+        {
+            if(volumePanel.activeSelf == true)
+            {
+                StartCoroutine(VolumeWaitSeconds());
+                StopCoroutine(VolumeWaitSeconds());                
+            }
+            else
+            {
+                volumePanel.SetActive(true);
+            }
+            
+        }
+    }
 
+    public void ShowTips()
+    {
+        if(tipsPanel != null)
+        {
+            if(tipsPanel.activeSelf == true)
+            {
+                StartCoroutine(TipsWaitSeconds());
+                StopCoroutine(TipsWaitSeconds());
+            }
+            else
+            {
+                tipsPanel.SetActive(true);
+            }
+        }
     }
 
     public void LevelComplete()//通关页面
@@ -111,5 +156,26 @@ public class GameManager : MonoBehaviour
         transAnimation.SetTrigger("Start");
         yield return new WaitForSeconds(0.7f);
         SceneManager.LoadScene(index);
+    }
+
+    IEnumerator SettingWaitSeconds()
+    {
+        settingAnimation.SetTrigger("End");
+        yield return new WaitForSeconds(0.5f);
+        settingPanel.SetActive(false);
+    }
+
+    IEnumerator VolumeWaitSeconds()
+    {
+        volumeAnimation.SetTrigger("End");
+        yield return new WaitForSeconds(0.5f);
+        volumePanel.SetActive(false);
+    }
+
+    IEnumerator TipsWaitSeconds()
+    {
+        tipsAnimation.SetTrigger("End");
+        yield return new WaitForSeconds(1f);
+        tipsPanel.SetActive(false);
     }
 }

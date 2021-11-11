@@ -451,7 +451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a0d3c3a59be5245b5296deb25377cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCount: 0
 --- !u!136 &7076849903512628904
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -463,9 +462,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.31773597
-  m_Height: 2
+  m_Height: 1.834593
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: -0.18226409}
+  m_Center: {x: 0, y: 0.4172966, z: -0.18226409}
 --- !u!1 &7076920754749114032
 GameObject:
   m_ObjectHideFlags: 0
