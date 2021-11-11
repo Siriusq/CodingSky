@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
+    public AudioMixer audioMixer;
+
     public AudioSource attack1;
     public AudioSource attack2;
     public AudioSource collectGems;
@@ -29,16 +32,31 @@ public class AudioManager : MonoBehaviour
     public Slider musicSlider;
     public Slider sfxSlider;
 
-    public float main;
-    public float music;
-    public float sfx;
+    float main;
+    float music;
+    float sfx;
+
+    public void MainSlider(float f)//主音量调节
+    {
+        audioMixer.SetFloat("MainMixer", Mathf.Log10(f) * 20);
+    }
+
+    public void BgmSlider(float f)//BGM音量调节
+    {
+        audioMixer.SetFloat("BGMMixer", Mathf.Log10(f) * 20);
+    }
+
+    public void SfxSlider(float f)//SFX音量调节
+    {
+        audioMixer.SetFloat("SFXMixer", Mathf.Log10(f) * 20);
+    }
 
     public void MuteButton()//一键静音
     {
         if (mainVol != null)
         {
             main = mainSlider.value;
-            mainSlider.value = 0;
+            mainSlider.value = 0.0001f;
             mainVol.gameObject.SetActive(false);
         }
     }
@@ -57,7 +75,7 @@ public class AudioManager : MonoBehaviour
         if (musicVol != null)
         {
             music = musicSlider.value;
-            musicSlider.value = 0;
+            musicSlider.value = 0.0001f;
             musicVol.gameObject.SetActive(false);
         }
     }
@@ -76,7 +94,7 @@ public class AudioManager : MonoBehaviour
         if (sfxVol != null)
         {
             sfx = sfxSlider.value;
-            sfxSlider.value = 0;
+            sfxSlider.value = 0.0001f;
             sfxVol.gameObject.SetActive(false);
         }
     }
