@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioMixer audioMixer;
+    [SerializeField] public AudioMixer audioMixer;
 
     public AudioSource attack1;
     public AudioSource attack2;
@@ -32,23 +32,46 @@ public class AudioManager : MonoBehaviour
     public Slider musicSlider;
     public Slider sfxSlider;
 
-    float main;
-    float music;
-    float sfx;
+    static float main;
+    static float music;
+    static float sfx;
+    static float mainCache = 1;
+    static float musicCache = 1;
+    static float sfxCache = 1;
+
+    private void Start()
+    {
+        mainSlider.value = mainCache;
+        musicSlider.value = musicCache;
+        sfxSlider.value = sfxCache;
+
+        if(mainSlider.value == 0.0001f) { mainVol.gameObject.SetActive(false); }//保持静音按钮跨关卡一致性
+        if (musicSlider.value == 0.0001f) { musicVol.gameObject.SetActive(false); }
+        if (sfxSlider.value == 00.0001f) { sfxVol.gameObject.SetActive(false); }
+    }
 
     public void MainSlider(float f)//主音量调节
     {
         audioMixer.SetFloat("MainMixer", Mathf.Log10(f) * 20);
+        mainCache = f;
+        if (f == 0.0001f) { mainVol.gameObject.SetActive(false); }//滑块归零时自动开启静音按钮
+        else { mainVol.gameObject.SetActive(true); }//滑块大于向右滑动时解除静音
     }
 
     public void BgmSlider(float f)//BGM音量调节
     {
         audioMixer.SetFloat("BGMMixer", Mathf.Log10(f) * 20);
+        musicCache = f;
+        if (f == 0.0001f) { musicVol.gameObject.SetActive(false); }
+        else { musicVol.gameObject.SetActive(true); }
     }
 
     public void SfxSlider(float f)//SFX音量调节
     {
         audioMixer.SetFloat("SFXMixer", Mathf.Log10(f) * 20);
+        sfxCache = f;
+        if (f == 0.0001f) { sfxVol.gameObject.SetActive(false); }
+        else { sfxVol.gameObject.SetActive(true); }
     }
 
     public void MuteButton()//一键静音
