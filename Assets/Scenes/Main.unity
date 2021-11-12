@@ -4253,6 +4253,7 @@ MonoBehaviour:
   closeButton: {fileID: 1935862055}
   clickPanelButton: {fileID: 1014490074}
   disableButton: {fileID: 780033328}
+  vectory: {fileID: 0}
   mainVol: {fileID: 1237913026}
   musicVol: {fileID: 2144929515}
   sfxVol: {fileID: 557264285}

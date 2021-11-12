@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource closeButton;
     public AudioSource clickPanelButton;
     public AudioSource disableButton;
+    public AudioSource vectory;
 
     public Button mainVol;
     public Button musicVol;
