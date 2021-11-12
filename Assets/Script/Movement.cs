@@ -102,6 +102,7 @@ public class Movement : MonoBehaviour
         {
             dogBehaviour.SetBool("isMove", true);
             destination = this.transform.position + transform.forward;
+            AudioManager.actionListener = 4;
             Tweener tweener = transform.DOMove(destination, 1);
         }
         else if (x.Equals("TurnLeft"))
@@ -109,6 +110,7 @@ public class Movement : MonoBehaviour
             dogBehaviour.SetBool("isMove", true);
             direction = transform.forward;
             direction.y -= 90;
+            AudioManager.actionListener = 4;
             Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);
         }
         else if (x.Equals("TurnRight"))
@@ -116,7 +118,8 @@ public class Movement : MonoBehaviour
             dogBehaviour.SetBool("isMove", true);
             direction = transform.forward;
             direction.y += 90;
-            Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);
+            AudioManager.actionListener = 4;
+            Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);            
         }
         else if (x.Equals("Collect"))
         {
@@ -127,11 +130,13 @@ public class Movement : MonoBehaviour
         {
             dogBehaviour.SetBool("isAttack", true);
             canAttack = true;
+            AudioManager.actionListener = 2;
         }
         else if (x.Equals("Treasure"))
         {
             dogBehaviour.SetBool("isOpen", true);
             canOPen = true;
+            AudioManager.actionListener = 6;
         }               
     }
 

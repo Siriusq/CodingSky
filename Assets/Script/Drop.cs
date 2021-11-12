@@ -12,6 +12,7 @@ public class Drop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerE
         if (drag != null)
         {
             drag.transformParentCache = this.transform;//将暂存的父类更改为drop所在的面板
+            AudioManager.actionListener = 8;
         }
     }
 

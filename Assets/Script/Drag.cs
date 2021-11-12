@@ -46,6 +46,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         this.transform.SetParent(this.transform.parent.parent);//将拖拽物体的父类设置为所在面板的父类（就是她的爷爷）
 
         GetComponent<CanvasGroup>().blocksRaycasts = false;//拖拽物体时关闭UI拦截
+        AudioManager.actionListener = 7;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -128,7 +129,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
 
         // if 面板托盘中的判断
-        if (this.transform.parent.CompareTag("SubCondition"))
+        if (this.transform.parent.CompareTag("SubCondition")|| this.transform.parent.CompareTag("SubConditionElse"))
         {
             //Debug.Log(this.transform.parent.childCount);
             // 防止用户搞事情，把 if 代码块拖到自己的condition中去
@@ -210,6 +211,8 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 break;         
 
         }
+
+        AudioManager.actionListener = 1;//通知AudioManager播放警告音效
 
         StartCoroutine(WaitMessage(s));
         StopCoroutine(WaitMessage(s));

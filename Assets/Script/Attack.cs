@@ -63,6 +63,7 @@ public class Attack : MonoBehaviour
         dog.transform.GetComponent<Rigidbody>().freezeRotation = false;//关闭狗狗的旋转锁定
 
         Tweener tweener = transform.DOMove(this.transform.position + transform.up, 0.1f);//狗狗起飞！
+        AudioManager.actionListener = 5;
     }
 
     IEnumerator AttackWait()

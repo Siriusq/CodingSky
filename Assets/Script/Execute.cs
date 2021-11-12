@@ -42,7 +42,6 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         if (childCount != 0)
         {
-            // Todo: 可以给运行到的代码块的高亮，不过应该加在人物移动那里
             // 先把对应的块加到数组里
             foreach (Transform block in executePanel.transform)//遍历代码块
             {

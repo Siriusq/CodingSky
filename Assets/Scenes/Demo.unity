@@ -6224,7 +6224,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1344913828}
           m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-          m_MethodName: Drop
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -6964,7 +6964,6 @@ GameObject:
   - component: {fileID: 315877465}
   - component: {fileID: 315877467}
   - component: {fileID: 315877466}
-  - component: {fileID: 315877468}
   m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
@@ -7029,19 +7028,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315877464}
   m_CullTransparentMesh: 1
---- !u!114 &315877468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 315877464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
 --- !u!1001 &321145749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7187,7 +7173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4988151217579269166, guid: c9a6847ddb4819646ba48ec91ffdacc1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.64
+      value: -18.59
       objectReference: {fileID: 0}
     - target: {fileID: 4988151217579269166, guid: c9a6847ddb4819646ba48ec91ffdacc1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7195,7 +7181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4988151217579269166, guid: c9a6847ddb4819646ba48ec91ffdacc1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -27.937
+      value: -26.96
       objectReference: {fileID: 0}
     - target: {fileID: 4988151217579269166, guid: c9a6847ddb4819646ba48ec91ffdacc1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -24790,7 +24776,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1344913828}
           m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-          m_MethodName: Drop
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -25727,7 +25713,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1344913828}
           m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-          m_MethodName: Drop
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -27373,7 +27359,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1344913828}
           m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-          m_MethodName: Drop
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -34206,7 +34192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1553941038
 RectTransform:
   m_ObjectHideFlags: 0
@@ -46148,7 +46134,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1344913828}
           m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-          m_MethodName: Drop
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -47377,6 +47363,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 256726476}
     m_Modifications:
+    - target: {fileID: 48980477250677860, guid: 6f24708e677593545b655d26da28daaf, type: 3}
+      propertyPath: warnAudio
+      value: 
+      objectReference: {fileID: 1360289104}
     - target: {fileID: 48980477250677860, guid: 6f24708e677593545b655d26da28daaf, type: 3}
       propertyPath: gameManager
       value: 

@@ -131,14 +131,18 @@ public class GameManager : MonoBehaviour
             if(gemCount > 2)
             {
                 gems[2].SetActive(true);//三星
+                AudioManager.actionListener = 9;
+                //Todo: 加一个声音
             }
             if (gemCount > 1)
             {
                 gems[1].SetActive(true);//两星
+                AudioManager.actionListener = 9;
             }
             if (gemCount > 0)
             {
                 gems[0].SetActive(true);//一星
+                AudioManager.actionListener = 9;
             }
         }
     }
@@ -175,7 +179,7 @@ public class GameManager : MonoBehaviour
     IEnumerator TipsWaitSeconds()
     {
         tipsAnimation.SetTrigger("End");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
         tipsPanel.SetActive(false);
     }
 }

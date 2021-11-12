@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] public AudioMixer audioMixer;
 
+    public static AudioMixer amInstance;
+
     public AudioSource attack1;
     public AudioSource attack2;
     public AudioSource collectGems;
@@ -40,6 +42,10 @@ public class AudioManager : MonoBehaviour
     static float musicCache = 1;
     static float sfxCache = 1;
 
+    public static bool warningListener = false;
+    public static bool attackListener = false;
+    public static int actionListener = 0;
+
     private void Start()
     {
         mainSlider.value = mainCache;
@@ -49,6 +55,52 @@ public class AudioManager : MonoBehaviour
         if(mainSlider.value == 0.0001f) { mainVol.gameObject.SetActive(false); }//保持静音按钮跨关卡一致性
         if (musicSlider.value == 0.0001f) { musicVol.gameObject.SetActive(false); }
         if (sfxSlider.value == 00.0001f) { sfxVol.gameObject.SetActive(false); }
+
+        
+    }
+
+    private void Update()
+    {
+        if (warningListener) { Warning(); }
+        switch (actionListener)
+        {
+            case 1://警告
+                Warning();
+                actionListener = 0;
+                break;
+            case 2://攻击
+                Attack1();
+                actionListener = 0;
+                break;
+            case 3://收集
+                CollectGems();
+                actionListener = 0;
+                break;
+            case 4://移动
+                PlayerMove();
+                actionListener = 0;
+                break;
+            case 5://史莱姆
+                Slime();
+                actionListener = 0;
+                break;
+            case 6://胜利
+                Win();
+                actionListener = 0;
+                break;
+            case 7://拖拽
+                Drag();
+                actionListener = 0;
+                break;
+            case 8://放下
+                Drop();
+                actionListener = 0;
+                break;
+            case 9://三星
+                Vectory();
+                actionListener = 0;
+                break;
+        }
     }
 
     public void MainSlider(float f)//主音量调节
@@ -141,6 +193,7 @@ public class AudioManager : MonoBehaviour
     public void Drag() { drag.Play(); }
     public void Drop() { drop.Play(); }
     public void Warning() { warning.Play(); }
+    public void Vectory() { vectory.Play(); }
     public void ClickButton() { clickButton.Play(); }
     public void CloseButton() { closeButton.Play(); }
     public void ClickPanelButton() { clickPanelButton.Play(); }

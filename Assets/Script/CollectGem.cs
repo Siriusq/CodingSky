@@ -17,6 +17,7 @@ public class CollectGem : MonoBehaviour
         {
             //Debug.Log("Collected!");
             gemsCount++;
+            AudioManager.actionListener = 3;
             Debug.Log(gemsCount);
             Destroy(gameObject);//删除宝石（相当于吃掉
             collect = false;
