@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ShowTips()
+    public void ShowTips()//提示面板
     {
         if(tipsPanel != null)
         {
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
                 tipsPanel.SetActive(true);
             }
         }
-    }//提示面板
+    }
 
     public void LevelComplete()//通关页面
     {
@@ -131,18 +131,18 @@ public class GameManager : MonoBehaviour
             if(gemCount > 2)
             {
                 gems[2].SetActive(true);//三星
-                AudioManager.actionListener = 9;
+                //AudioManager.actionListener = 9;
                 //Todo: 加一个声音
             }
             if (gemCount > 1)
             {
                 gems[1].SetActive(true);//两星
-                AudioManager.actionListener = 9;
+                //AudioManager.actionListener = 9;
             }
             if (gemCount > 0)
             {
                 gems[0].SetActive(true);//一星
-                AudioManager.actionListener = 9;
+                //AudioManager.actionListener = 9;
             }
         }
     }

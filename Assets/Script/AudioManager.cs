@@ -10,10 +10,8 @@ public class AudioManager : MonoBehaviour
 
     public static AudioMixer amInstance;
 
-    public AudioSource attack1;
-    public AudioSource attack2;
+    public AudioSource attack;
     public AudioSource collectGems;
-    public AudioSource playerMove;
     public AudioSource slime;
     public AudioSource win;
     public AudioSource drag;
@@ -24,6 +22,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource clickPanelButton;
     public AudioSource disableButton;
     public AudioSource vectory;
+    public AudioSource star;
+    public AudioSource step;
 
     public Button mainVol;
     public Button musicVol;
@@ -69,7 +69,7 @@ public class AudioManager : MonoBehaviour
                 actionListener = 0;
                 break;
             case 2://攻击
-                Attack1();
+                Attack();
                 actionListener = 0;
                 break;
             case 3://收集
@@ -77,7 +77,7 @@ public class AudioManager : MonoBehaviour
                 actionListener = 0;
                 break;
             case 4://移动
-                PlayerMove();
+                Step();
                 actionListener = 0;
                 break;
             case 5://史莱姆
@@ -97,9 +97,14 @@ public class AudioManager : MonoBehaviour
                 actionListener = 0;
                 break;
             case 9://三星
+                Star();
+                actionListener = 0;
+                break;
+            case 10://三星
                 Vectory();
                 actionListener = 0;
                 break;
+
         }
     }
 
@@ -184,16 +189,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Attack1() { attack1.Play(); }
-    public void Attack2() { attack2.Play(); }
+    public void Attack() { attack.Play(); }
     public void CollectGems() { collectGems.Play(); }
-    public void PlayerMove() { playerMove.Play(); }
     public void Slime() { slime.Play(); }
     public void Win() { win.Play(); }
     public void Drag() { drag.Play(); }
     public void Drop() { drop.Play(); }
     public void Warning() { warning.Play(); }
     public void Vectory() { vectory.Play(); }
+    public void Star() { star.Play(); }
+    public void Step() { step.Play(); }
     public void ClickButton() { clickButton.Play(); }
     public void CloseButton() { closeButton.Play(); }
     public void ClickPanelButton() { clickPanelButton.Play(); }
