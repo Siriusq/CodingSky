@@ -12,7 +12,7 @@ public class CameraControl : MonoBehaviour
     private Vector3 startMousePosition;//开始拖动的时候鼠标在屏幕上的位置
     private Vector3 startCameraPosition;//开始拖动的时候相机在世界空间上的位置
     [SerializeField]
-    private float ScrollScale = 0.1f;
+    private float ScrollScale = 0.5f;
     private float temp;
     private float tempAxis;
     [SerializeField]
