@@ -5267,15 +5267,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 49.1872
+      value: 39.697
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.6256
+      value: 0.000033259
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567883, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_Text
-      value: SINGLE LOOP
+      value: TWO LOOPS
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567883, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_FontData.m_Alignment

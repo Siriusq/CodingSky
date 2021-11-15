@@ -103,8 +103,16 @@ public class HighLightButton : MonoBehaviour
 
         for (int n = 0; n < subLoopTimes; n++)
         {
+            if (Movement.canFly)
+            { //¹·¹·±»¶¥·ÉÍ£Ö¹Ö´ÐÐ
+                break;
+            }
             for (int k = 0; k < subLoopChildCount; k++)
             {
+                if (Movement.canFly)
+                { //¹·¹·±»¶¥·ÉÍ£Ö¹Ö´ÐÐ
+                    break;            
+                }
                 tempSubLoopButton = subLoopPanel.transform.GetChild(k).GetComponent<Button>();
                 tempSubLoopButton.Select();
                 yield return new WaitForSeconds(1.5f);
@@ -122,6 +130,10 @@ public class HighLightButton : MonoBehaviour
         {
             for (int j = 0; j < loopChildCount; j++)
             {
+                if (Movement.canFly)
+                { //¹·¹·±»¶¥·ÉÍ£Ö¹Ö´ÐÐ
+                    break;
+                }
                 tempLoopButton = loopPanel.transform.GetChild(j).GetComponent<Button>();
                 if (tempLoopButton.transform.tag.Equals("SubLoop"))
                 {

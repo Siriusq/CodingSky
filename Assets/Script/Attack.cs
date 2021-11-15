@@ -79,7 +79,7 @@ public class Attack : MonoBehaviour
         // 调整动画时间达成受攻击后挂掉的效果
         yield return new WaitForSeconds(0.5f);
         attacking.SetBool("GotHit", true);
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
         attackCount++;
         Debug.Log("Attack: " + attackCount);
