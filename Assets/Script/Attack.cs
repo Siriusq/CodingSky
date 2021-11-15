@@ -71,6 +71,7 @@ public class Attack : MonoBehaviour
 
         yield return new WaitForSeconds(2f);//µÈ´ý1s
         gameManager.Failed();
+        AudioManager.actionListener = 1;
     }
 
     IEnumerator AttackWait()

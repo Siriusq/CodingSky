@@ -92,8 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b15e21e44648f4eafa4efe2fde7225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  messagePrefab: {fileID: 1644181209847214587, guid: 04e8fcfe1b488034ca9849b64b4b1876, type: 3}
+  messagePrefab: {fileID: 212259624554755511, guid: 6f3f62007d245014aa21a3b4078e77d9, type: 3}
   transformParentCache: {fileID: 0}
   originalParent: {fileID: 0}
   emptyBlockParentCache: {fileID: 0}

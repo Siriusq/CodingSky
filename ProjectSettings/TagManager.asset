@@ -29,6 +29,7 @@ TagManager:
   - Slime
   - Turtle
   - Warning
+  - UI
   layers:
   - Default
   - TransparentFX

@@ -225,7 +225,9 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     IEnumerator WaitMessage(string s)//实例化弹窗，然后播放动画
     {
+        GameObject canvas = GameObject.FindGameObjectWithTag("UI");
         var message = Instantiate(messagePrefab);
+        message.transform.SetParent(canvas.transform);
         Text t = message.GetComponentInChildren<Text>();
         t.text = s;
         yield return new WaitForSeconds(2f);

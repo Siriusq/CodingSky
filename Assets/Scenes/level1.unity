@@ -12222,7 +12222,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1566437065}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.30485573
+  m_Size: 0.30485576
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23175,7 +23175,7 @@ GameObject:
   - component: {fileID: 1144703553}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27456,7 +27456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b15e21e44648f4eafa4efe2fde7225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messagePrefab: {fileID: 1644181209847214587, guid: 04e8fcfe1b488034ca9849b64b4b1876, type: 3}
+  messagePrefab: {fileID: 212259624554755511, guid: 6f3f62007d245014aa21a3b4078e77d9, type: 3}
   transformParentCache: {fileID: 0}
   originalParent: {fileID: 0}
   emptyBlockParentCache: {fileID: 0}
