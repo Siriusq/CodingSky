@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public Animator settingAnimation;
     public GameObject tipsPanel;
     public Animator tipsAnimation;
+    public GameObject failPanel;
+    public Animator fialAnimation;
 
 
     void Awake()
@@ -140,6 +142,14 @@ public class GameManager : MonoBehaviour
             {
                 gems[0].SetActive(true);//一星
             }
+        }
+    }
+
+    public void Failed()//狗子被弹飞后提示重开
+    {
+        if(failPanel != null)
+        {
+            failPanel.SetActive(true);
         }
     }
 

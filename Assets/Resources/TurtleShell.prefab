@@ -1026,6 +1026,7 @@ GameObject:
   - component: {fileID: 4748069871760455848}
   - component: {fileID: 2694485402567810268}
   - component: {fileID: 9062790562767058536}
+  - component: {fileID: 5344886363592569265}
   m_Layer: 7
   m_Name: TurtleShell
   m_TagString: Slime
@@ -1091,10 +1092,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.31773597
-  m_Height: 2
+  m_Radius: 0.5
+  m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: -0.18226409}
+  m_Center: {x: 0, y: 0.5, z: -0.1}
 --- !u!114 &9062790562767058536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1107,6 +1108,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a0d3c3a59be5245b5296deb25377cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &5344886363592569265
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146051273063441254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &146196627336876622
 GameObject:
   m_ObjectHideFlags: 0

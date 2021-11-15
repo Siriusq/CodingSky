@@ -10,6 +10,7 @@ public class Attack : MonoBehaviour
     bool attack;
     GameObject dog;
     public static bool isSlime = false;// If模组中用来判断前面是啥的布尔
+    public GameManager gameManager;
 
     void Start()
     {
@@ -57,13 +58,19 @@ public class Attack : MonoBehaviour
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(1.5f);//等待1s
+        yield return new WaitForSeconds(0.5f);//等待1s
+        Movement.canFly = true;//狗狗被顶飞停止执行
+        yield return new WaitForSeconds(1f);//等待1s
+        
         
         dog = GameObject.FindGameObjectWithTag("Player");
         dog.transform.GetComponent<Rigidbody>().freezeRotation = false;//关闭狗狗的旋转锁定
 
         Tweener tweener = transform.DOMove(this.transform.position + transform.up, 0.1f);//狗狗起飞！
         AudioManager.actionListener = 5;
+
+        yield return new WaitForSeconds(2f);//等待1s
+        gameManager.Failed();
     }
 
     IEnumerator AttackWait()

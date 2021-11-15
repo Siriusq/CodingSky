@@ -61,6 +61,10 @@ public class HighLightButton : MonoBehaviour
         for (int i = 0; i < executeChildCount; i++)
         {            
             tempButton = executePanel.transform.GetChild(i).GetComponent<Button>();
+            if (Movement.canFly)
+            { //π∑π∑±ª∂•∑…Õ£÷π÷¥––
+                break; 
+            } 
             if (tempButton.transform.tag.Equals("Loop"))
             {
                 tempButton.Select();

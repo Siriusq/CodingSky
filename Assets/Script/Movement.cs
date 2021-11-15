@@ -19,6 +19,8 @@ public class Movement : MonoBehaviour
     public bool canOPen = false;
     public bool canAttack = false;
 
+    public static bool canFly = false;
+
     //下面是给if else的
     GameObject conditionIf; //if的面板
     GameObject conditionElse; //else的面板
@@ -38,6 +40,7 @@ public class Movement : MonoBehaviour
     {
         received = null;
         dogBehaviour = GetComponent<Animator>();
+        canFly = false;
     }
 
     void Update()
@@ -59,6 +62,10 @@ public class Movement : MonoBehaviour
         Debug.Log("Start");
         foreach (string s in received)
         {
+            if (canFly)
+            {
+                break;//狗狗被顶飞停止执行
+            }
             if (s.Equals("if"))
             {
                 conditionBlockList = new ArrayList();
