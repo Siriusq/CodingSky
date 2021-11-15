@@ -128,6 +128,14 @@ public class Movement : MonoBehaviour
             AudioManager.actionListener = 4;
             Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);            
         }
+        else if (x.Equals("Turn"))
+        {
+            dogBehaviour.SetBool("isMove", true);
+            direction = transform.forward;
+            direction.y += 180;
+            AudioManager.actionListener = 4;
+            Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);
+        }
         else if (x.Equals("Collect"))
         {
             dogBehaviour.SetBool("isCollecting", true);

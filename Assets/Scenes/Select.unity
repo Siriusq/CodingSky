@@ -1157,7 +1157,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349127426}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2901,15 +2901,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 49.0845
+      value: 39.617
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5.831
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -155
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567883, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_Text
-      value: NESTED LOOP
+      value: TWO LOOPS
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567883, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_FontData.m_Alignment
@@ -2935,7 +2939,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164247189}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -3481,7 +3485,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292023378}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -3749,15 +3753,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 51.1376
+      value: 30.895
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.7247
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -155
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567883, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_Text
-      value: IF ELSE LOOP
+      value: IF ELSE
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567883, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_FontData.m_Alignment
@@ -3783,7 +3791,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386813853}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -5271,11 +5279,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000033259
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567883, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_Text
-      value: TWO LOOPS
+      value: FUNCTIONS
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567883, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_FontData.m_Alignment
@@ -5301,7 +5309,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940567829}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -5458,11 +5466,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -4.7083
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567883, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_Text
-      value: IF ELSE
+      value: NESTED LOOP
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567883, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_FontData.m_Alignment
@@ -5488,7 +5496,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952956923}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -5798,15 +5806,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 49.8813
+      value: 49.154
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -4.2374
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311745696678567882, guid: 8841e29836503a44e8d476f754a81866, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -155
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567883, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_Text
-      value: FINAL
+      value: IF ELSE LOOP
       objectReference: {fileID: 0}
     - target: {fileID: 8311745696678567883, guid: 8841e29836503a44e8d476f754a81866, type: 3}
       propertyPath: m_FontData.m_Alignment
@@ -5832,7 +5844,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995416190}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -5994,7 +6006,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8311745695094110527}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
