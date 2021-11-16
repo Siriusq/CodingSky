@@ -35,6 +35,7 @@ public class Movement : MonoBehaviour
     string elseBlock;
     bool isGem;
     bool isSlime;
+    bool turnSign = false;
 
     void Start()
     {
@@ -118,7 +119,7 @@ public class Movement : MonoBehaviour
             direction = transform.forward;
             direction.y -= 90;
             AudioManager.actionListener = 4;
-            Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);
+            Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);            
         }
         else if (x.Equals("TurnRight"))
         {
@@ -132,7 +133,16 @@ public class Movement : MonoBehaviour
         {
             dogBehaviour.SetBool("isMove", true);
             direction = transform.forward;
-            direction.y += 180;
+            if (!turnSign)
+            {
+                direction.y += 180;
+                turnSign = true;
+            }
+            else
+            {
+                direction.y += 180;
+            }
+           
             AudioManager.actionListener = 4;
             Tweener tweener = transform.DOLocalRotate(direction, 1, RotateMode.LocalAxisAdd);
         }
@@ -152,7 +162,10 @@ public class Movement : MonoBehaviour
             dogBehaviour.SetBool("isOpen", true);
             canOPen = true;
             AudioManager.actionListener = 6;
-        }               
+        }
+        //修复Z轴锁定不了的bug
+        Vector3 eulerRotation = transform.rotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(eulerRotation.x, eulerRotation.y, 0);
     }
 
     public void GetCode(ArrayList codes)
