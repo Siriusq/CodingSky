@@ -71,7 +71,7 @@ public class Movement : MonoBehaviour
             {
                 conditionBlockList = new ArrayList();
                 conditionBlockList.AddRange(ConditionBlocks());
-                yield return new WaitForSeconds(0.1f);
+                //yield return new WaitForSeconds(0.1f);
                 foreach (string x in conditionBlockList)
                 {
                     Move(x);
