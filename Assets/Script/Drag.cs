@@ -126,8 +126,6 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             SendMessage(2);
         }
 
-
-
         // if 面板托盘中的判断
         if (this.transform.parent.CompareTag("SubCondition")|| this.transform.parent.CompareTag("SubConditionElse"))
         {
@@ -153,30 +151,80 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             SendMessage(4);
         }
 
-        //防止用户把if拖动到循环里去
-        if (this.transform.parent.CompareTag("LoopPanel") && this.transform.tag.Equals("If"))
-        {
-            //Destroy(this.gameObject);
-            SendMessage(5);
-        }
-
-        //防止用户把if拖动到子循环里去
-        if (this.transform.parent.CompareTag("SubLoopPanel") && this.transform.tag.Equals("If"))
-        {
-            //Destroy(this.gameObject);
-            SendMessage(5);
-        }
-
-        //Todo: 如果循环面板存在if，然后再把if拖到if的面板里，报错
-        if (this.transform.parent.CompareTag("If") && this.transform.tag.Equals("LoopPanel"))
+        //Todo: 如果if的面板里面是空的，不能拖
+        if (this.transform.tag.Equals("If"))
         {
             GameObject If = GameObject.FindGameObjectWithTag("SubCondition");
             GameObject Else = GameObject.FindGameObjectWithTag("SubConditionElse");
-            if (If.transform.GetChild(0).tag.Equals("Loop") || If.transform.GetChild(1).tag.Equals("Loop"))
+            if (If.transform.childCount == 0 || Else.transform.childCount == 0)
             {
                 Destroy(this.gameObject);
             }
-            
+            else
+            {
+                string ifContent = If.transform.GetChild(0).tag;
+                string elseContent = Else.transform.GetChild(0).tag;
+                //用户先把循环拖进if面板，再把if拖进循环面板，搁着给我套娃
+                if (this.transform.parent.CompareTag("LoopPanel"))
+                {
+                    if (ifContent.Equals("Loop") || elseContent.Equals("Loop"))
+                    {
+                        Destroy(this.gameObject);
+                    }
+                }
+                //子循环 同上
+                if (this.transform.parent.CompareTag("SubLoopPanel"))
+                {
+                    if (ifContent.Equals("Loop") || elseContent.Equals("Loop") || ifContent.Equals("SubLoop") || elseContent.Equals("SubLoop"))
+                    {
+                        Destroy(this.gameObject);
+                    }
+                }
+            }
+        }        
+
+        //防止如果循环面板存在if，然后再把循环拖到if的面板
+        if ((this.transform.parent.CompareTag("SubCondition") || this.transform.parent.CompareTag("SubConditionElse")) && this.transform.tag.Equals("Loop"))
+        {
+            //找循环面板里的元素
+            GameObject loopP = GameObject.FindGameObjectWithTag("LoopPanel");
+            bool findIf = false;
+            //有if的话
+            foreach (Transform loopBlock in loopP.transform)
+            {
+                if (loopBlock.tag.Equals("If"))
+                {
+                    findIf = true;
+                    Destroy(this.gameObject);
+                }
+            }
+            //循环拖到if面板是直接销毁
+            if (findIf)
+            {
+                Destroy(this.gameObject);
+            }            
+        }
+
+        //防止如果子循环面板存在if，然后再把子循环拖到if的面板
+        if ((this.transform.parent.CompareTag("SubCondition") || this.transform.parent.CompareTag("SubConditionElse")) && this.transform.tag.Equals("SubLoop"))
+        {
+            //找循环面板里的元素
+            GameObject subLoopP = GameObject.FindGameObjectWithTag("SubLoopPanel");
+            bool findIf = false;
+            //有if的话
+            foreach (Transform subLoopBlock in subLoopP.transform)
+            {
+                if (subLoopBlock.tag.Equals("If"))
+                {
+                    findIf = true;
+                    Destroy(this.gameObject);
+                }
+            }
+            //循环拖到if面板是直接销毁
+            if (findIf)
+            {
+                Destroy(this.gameObject);
+            }
         }
 
         //防止用户把循环代码块拖到自己的循环里去 + 防止用户把主循环拖到子循环里去
@@ -194,6 +242,12 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         GetComponent<CanvasGroup>().blocksRaycasts = true;//拖拽结束时恢复UI拦截
         Destroy(emptyBlock);//结束时删除占位符
     }
+
+    private void Constraint()
+    {
+
+    }
+
 
     public void SendMessage(int i)//弹窗
     {
