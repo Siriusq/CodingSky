@@ -135,12 +135,13 @@ public class Movement : MonoBehaviour
             direction = transform.forward;
             if (!turnSign)
             {
-                direction.y += 180;
+                direction.y -= 180;
                 turnSign = true;
             }
             else
             {
                 direction.y += 180;
+                turnSign = false;
             }
            
             AudioManager.actionListener = 4;
