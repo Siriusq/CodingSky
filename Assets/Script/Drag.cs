@@ -104,17 +104,39 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             block.transform.SetParent(originalParent);//改变父类
             block.transform.localScale = new Vector3(1, 1, 1);//如果不设置的话默认会缩放成0.7倍，很奇怪
             prefab = null;
+        }        
+
+        //判断操作是否合法，不合法则弹出提示
+        Constraint();
+
+        //删除拖动的物体
+        if (this.transform.parent.CompareTag("Delete")){
+            Destroy(this.gameObject);
+        }
+
+        GetComponent<CanvasGroup>().blocksRaycasts = true;//拖拽结束时恢复UI拦截
+        Destroy(emptyBlock);//结束时删除占位符
+    }
+
+    private void Constraint()
+    {
+        //防止用户把循环代码块拖到自己的循环里去 + 防止用户把主循环拖到子循环里去
+        if (this.transform.parent.CompareTag("SubLoopPanel") && (this.transform.tag.Equals("Loop") || this.transform.tag.Equals("SubLoop")))
+        {
+            Destroy(this.gameObject);
+            SendMessage(6);
         }
 
         //防止执行面板图标溢出
-        if (this.transform.parent.CompareTag("execute_panel") && this.transform.parent.childCount > 29){
+        if (this.transform.parent.CompareTag("execute_panel") && this.transform.parent.childCount > 29)
+        {
             Destroy(this.gameObject);
             SendMessage(0);
         }
 
         //防止循环面板图标溢出
         if (this.transform.parent.CompareTag("LoopPanel") && this.transform.parent.childCount > 15)
-        {            
+        {
             Destroy(this.gameObject);
             SendMessage(1);
         }
@@ -127,7 +149,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         }
 
         // if 面板托盘中的判断
-        if (this.transform.parent.CompareTag("SubCondition")|| this.transform.parent.CompareTag("SubConditionElse"))
+        if (this.transform.parent.CompareTag("SubCondition") || this.transform.parent.CompareTag("SubConditionElse"))
         {
             //Debug.Log(this.transform.parent.childCount);
             // 防止用户搞事情，把 if 代码块拖到自己的condition中去
@@ -137,7 +159,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 SendMessage(3);
             }
             // 如果面板中已经存在其他代码块，那么在拖动新的代码块过来之后删除原来的，这个2还是因为unity愚蠢的List计数问题
-            else if(this.transform.parent.childCount > 2)
+            else if (this.transform.parent.childCount > 2)
             {
                 DestroyImmediate(this.transform.parent.GetChild(2).gameObject);
                 //gameManager.WarningPopup("Conditional code block cannot be used in their own panels!");
@@ -159,6 +181,10 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             if (If.transform.childCount == 0 || Else.transform.childCount == 0)
             {
                 Destroy(this.gameObject);
+                if (!this.transform.parent.CompareTag("Delete"))
+                {
+                    SendMessage(7);
+                }
             }
             else
             {
@@ -170,6 +196,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                     if (ifContent.Equals("Loop") || elseContent.Equals("Loop"))
                     {
                         Destroy(this.gameObject);
+                        SendMessage(5);
                     }
                 }
                 //子循环 同上
@@ -178,31 +205,26 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                     if (ifContent.Equals("Loop") || elseContent.Equals("Loop") || ifContent.Equals("SubLoop") || elseContent.Equals("SubLoop"))
                     {
                         Destroy(this.gameObject);
+                        SendMessage(5);
                     }
                 }
             }
-        }        
+        }
 
         //防止如果循环面板存在if，然后再把循环拖到if的面板
         if ((this.transform.parent.CompareTag("SubCondition") || this.transform.parent.CompareTag("SubConditionElse")) && this.transform.tag.Equals("Loop"))
         {
             //找循环面板里的元素
             GameObject loopP = GameObject.FindGameObjectWithTag("LoopPanel");
-            bool findIf = false;
             //有if的话
             foreach (Transform loopBlock in loopP.transform)
             {
                 if (loopBlock.tag.Equals("If"))
                 {
-                    findIf = true;
                     Destroy(this.gameObject);
+                    SendMessage(5);
                 }
             }
-            //循环拖到if面板是直接销毁
-            if (findIf)
-            {
-                Destroy(this.gameObject);
-            }            
         }
 
         //防止如果子循环面板存在if，然后再把子循环拖到if的面板
@@ -226,26 +248,6 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 Destroy(this.gameObject);
             }
         }
-
-        //防止用户把循环代码块拖到自己的循环里去 + 防止用户把主循环拖到子循环里去
-        if (this.transform.parent.CompareTag("SubLoopPanel") && (this.transform.tag.Equals("Loop") || this.transform.tag.Equals("SubLoop")))
-        {
-            Destroy(this.gameObject);
-            SendMessage(6);
-        }
-
-        //删除拖动的物体
-        if (this.transform.parent.CompareTag("Delete")){
-            Destroy(this.gameObject);
-        }
-
-        GetComponent<CanvasGroup>().blocksRaycasts = true;//拖拽结束时恢复UI拦截
-        Destroy(emptyBlock);//结束时删除占位符
-    }
-
-    private void Constraint()
-    {
-
     }
 
 
@@ -270,11 +272,14 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 s = "Cannot use a loop code block in the same loop panel!";
                 break;
             case 5:
-                s = "Conditional code block loops are not supported at this time!";
+                s = "Infinite loop detected, operation denied";
                 break;
             case 6:
                 s = "Cannot use a loop code block in the same loop/subloop panel!";
-                break;         
+                break;
+            case 7:
+                s = "Cannot use empty an conditional statement!";
+                break;
 
         }
 
