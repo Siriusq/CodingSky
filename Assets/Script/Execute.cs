@@ -90,6 +90,10 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                     {
                         loopArrayList.AddRange(subLoopBlockTags);
                     }
+                    else if (loopBlock.tag.Equals("If"))//添加子循环的if支持
+                    {
+                        loopArrayList.Add("if");
+                    }
                     else
                     {
                         loopArrayList.Add(loopBlock.tag);
@@ -113,7 +117,15 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             {
                 foreach (Transform subLoopBlock in subLoopPanel.transform)
                 {
-                    subLoopArrayList.Add(subLoopBlock.tag);
+                    if (subLoopBlock.tag.Equals("If"))//添加子循环的if支持
+                    {
+                        subLoopArrayList.Add("if");
+                    }
+                    else
+                    {
+                        subLoopArrayList.Add(subLoopBlock.tag);
+                    }
+                    
                 }
             }
         }

@@ -33,6 +33,7 @@ public class Attack : MonoBehaviour
             StartCoroutine(AttackWait());
             attack = false;
             StopCoroutine(AttackWait());
+            isSlime = false;
         }
     }
 
@@ -49,11 +50,12 @@ public class Attack : MonoBehaviour
     {
         StartCoroutine(Wait());        
         StopCoroutine(Wait());
+        isSlime = false;
     }
 
     void OnCollisionExit(Collision collision)
     {
-
+        isSlime = false;
     }
 
     IEnumerator Wait()

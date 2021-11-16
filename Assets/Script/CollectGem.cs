@@ -21,6 +21,7 @@ public class CollectGem : MonoBehaviour
             Debug.Log(gemsCount);
             Destroy(gameObject);//删除宝石（相当于吃掉
             collect = false;
+            isGem = false;
         }
     }
 

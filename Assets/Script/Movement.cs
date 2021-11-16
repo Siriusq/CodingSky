@@ -70,12 +70,12 @@ public class Movement : MonoBehaviour
             if (s.Equals("if"))
             {
                 conditionBlockList = new ArrayList();
-                conditionBlockList.AddRange(ConditionBlocks());             
-                yield return new WaitForSeconds(0.1f);                
+                conditionBlockList.AddRange(ConditionBlocks());
+                yield return new WaitForSeconds(0.1f);
                 foreach (string x in conditionBlockList)
                 {
                     Move(x);
-                    Debug.Log("if " + x);
+                    Debug.Log(x);
                     yield return new WaitForSeconds(1.5f);
                     boolControl();
                 }
@@ -196,24 +196,27 @@ public class Movement : MonoBehaviour
         ifCodeBlockTags.AddRange(isLoop(ifBlock));
         elseCodeBlockTags.AddRange(isLoop(elseBlock));
 
+        Debug.Log("Slime "+isSlime);
+        Debug.Log("Gem "+isGem);
+
         if (option == 0)
         {
-            if (isSlime && !isGem)
+            if (isSlime)
             {
                 codes.AddRange(ifCodeBlockTags);
             }
-            else if (!isSlime && isGem)
+            else
             {
                 codes.AddRange(elseCodeBlockTags);
             }
         }
-        else
+        else if (option == 1)
         {
-            if (!isSlime && isGem)
+            if (isGem)
             {
                 codes.AddRange(ifCodeBlockTags);
             }
-            else if (isSlime && !isGem)
+            else
             {
                 codes.AddRange(elseCodeBlockTags);
             }

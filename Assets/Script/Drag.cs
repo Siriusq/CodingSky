@@ -156,15 +156,27 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         //防止用户把if拖动到循环里去
         if (this.transform.parent.CompareTag("LoopPanel") && this.transform.tag.Equals("If"))
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
             SendMessage(5);
         }
 
         //防止用户把if拖动到子循环里去
         if (this.transform.parent.CompareTag("SubLoopPanel") && this.transform.tag.Equals("If"))
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
             SendMessage(5);
+        }
+
+        //Todo: 如果循环面板存在if，然后再把if拖到if的面板里，报错
+        if (this.transform.parent.CompareTag("If") && this.transform.tag.Equals("LoopPanel"))
+        {
+            GameObject If = GameObject.FindGameObjectWithTag("SubCondition");
+            GameObject Else = GameObject.FindGameObjectWithTag("SubConditionElse");
+            if (If.transform.GetChild(0).tag.Equals("Loop") || If.transform.GetChild(1).tag.Equals("Loop"))
+            {
+                Destroy(this.gameObject);
+            }
+            
         }
 
         //防止用户把循环代码块拖到自己的循环里去 + 防止用户把主循环拖到子循环里去
