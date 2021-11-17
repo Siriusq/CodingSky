@@ -9,6 +9,11 @@ public class CollectGem : MonoBehaviour
     bool collect;
     public static bool isGem = false;//If模组中用来判断前面是不是宝石的布尔
 
+    private void Start()
+    {
+        DOTween.Clear(true);
+    }
+
     void OnTriggerStay(Collider gemCollider)//当玩家在宝石碰撞体里停留时
     {
         collect = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>().canCollect;//读取移动脚本里的布尔值，判断能否拾取星星
@@ -29,7 +34,7 @@ public class CollectGem : MonoBehaviour
     {
         if (gemCollider.tag == "Player")
         {
-            //Debug.Log("Enter!");
+            //Debug.Log("rrr!");
             Tweener tweener = transform.DOMove(this.transform.position + transform.forward, 1.2f);
         }
     }

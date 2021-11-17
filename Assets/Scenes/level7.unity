@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 8b36dcf092ac77f4bbe9e2fadb910967, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -565,7 +565,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.061798096, y: 0}
+  m_AnchoredPosition: {x: -0.060272217, y: 0}
   m_SizeDelta: {x: 750.12, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &17433409
@@ -1191,7 +1191,7 @@ PrefabInstance:
       objectReference: {fileID: 893160163}
     - target: {fileID: 465606219347841763, guid: faedff9eecbd44b4d8f26fe667e60ca0, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 465606219347841763, guid: faedff9eecbd44b4d8f26fe667e60ca0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21574,8 +21574,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1566437066}
   m_HandleRect: {fileID: 1566437065}
   m_Direction: 0
-  m_Value: 1.0152671
-  m_Size: 0.9998376
+  m_Value: 1.0022889
+  m_Size: 0.99984
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -39069,7 +39069,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -10, z: 0}
 --- !u!4 &1164986015 stripped
 Transform:
@@ -43772,7 +43772,7 @@ RectTransform:
   m_Children:
   - {fileID: 888482486}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -57285,7 +57285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7804906223203268833, guid: dabb4f88d6e01694593c8856ac4097b2, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7804906223203268833, guid: dabb4f88d6e01694593c8856ac4097b2, type: 3}
       propertyPath: m_AnchorMax.x
