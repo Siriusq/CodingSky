@@ -161,13 +161,13 @@ public class HighLightButton : MonoBehaviour
 
         if (option == 0)
         {
-            if (isSlime && !isGem)
+            if (isSlime)
             {
                 tempIfButton.Select();
                 yield return StartCoroutine(IfButton(tempIfButton.transform.tag));//等待协程完成
                 StopCoroutine(IfButton(tempIfButton.transform.tag));
             }
-            else if (!isSlime && isGem)
+            else
             {
                 tempElseButton.Select();
                 yield return StartCoroutine(ElseButton(tempElseButton.transform.tag));
@@ -176,13 +176,13 @@ public class HighLightButton : MonoBehaviour
         }
         else
         {
-            if (!isSlime && isGem)
+            if (isGem)
             {
                 tempIfButton.Select();
                 yield return StartCoroutine(IfButton(tempIfButton.transform.tag));
                 StopCoroutine(IfButton(tempIfButton.transform.tag));
             }
-            else if (isSlime && !isGem)
+            else
             {
                 tempElseButton.Select();
                 yield return StartCoroutine(ElseButton(tempElseButton.transform.tag));
