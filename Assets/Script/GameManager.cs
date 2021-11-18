@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Animator tipsAnimation;
     public GameObject failPanel;
     public Animator fialAnimation;
+    public GameObject PausePanel;
 
 
     void Awake()
@@ -55,10 +56,12 @@ public class GameManager : MonoBehaviour
     {
         if (Time.timeScale == 1)
         {
+            PausePanel.SetActive(true);
             Time.timeScale = 0;
         }
         else
         {
+            PausePanel.SetActive(false);
             Time.timeScale = 1;
         }
     }

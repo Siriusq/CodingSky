@@ -28,6 +28,7 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public HighLightButton highLight;
 
     public static ArrayList highlightButtons = new ArrayList();// 高亮顺序数组
+    public GameObject clickBlock;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -71,6 +72,8 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         player.GetCode(codeBlockTags);
         HighLightButton.GetCode(highlightButtons);
+        clickBlock.SetActive(true);
+        this.GetComponent<Button>().enabled = false;
     }
 
     public ArrayList LoopArray() //获取循环面板里的代码
