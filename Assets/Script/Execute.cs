@@ -73,7 +73,9 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         player.GetCode(codeBlockTags);
         HighLightButton.GetCode(highlightButtons);
         clickBlock.SetActive(true);
-        this.GetComponent<Button>().enabled = false;
+        //this.GetComponent<Button>().enabled = false;
+        StartCoroutine(BlockWait());
+        StopCoroutine(BlockWait());
     }
 
     public ArrayList LoopArray() //获取循环面板里的代码
@@ -133,5 +135,11 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             }
         }
         return subLoopArrayList;
+    }
+
+    IEnumerator BlockWait()
+    {
+        yield return new WaitForSeconds(0.01f);
+        this.GetComponent<Button>().enabled = false;
     }
 }
