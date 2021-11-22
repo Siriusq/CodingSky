@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Runtime.InteropServices;
 
 public class GameManager : MonoBehaviour
 {
+    [DllImport("__Internal")]
+    private static extern void AlertParam(int param);
+
+    [DllImport("__Internal")]
+    private static extern void PostLevel(int level);
+
+
     static GameManager manager;
     public Animator transAnimation;
     public GameObject winningPanel;
@@ -42,6 +50,16 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void UnityCallJSFuncWithParam(int param)
+    {
+        AlertParam(param);
+    }
+
+    public void SendLevel(int level)
+    {
+        PostLevel(level);
     }
 
     public void Restart()//重新开始游戏
@@ -169,6 +187,7 @@ public class GameManager : MonoBehaviour
         transAnimation.SetTrigger("Start");
         yield return new WaitForSeconds(0.7f);
         SceneManager.LoadScene(index);
+        SendLevel(index-1);
     }
 
     IEnumerator SettingWaitSeconds()
