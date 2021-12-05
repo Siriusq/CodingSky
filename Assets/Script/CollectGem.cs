@@ -8,6 +8,7 @@ public class CollectGem : MonoBehaviour
     public static int gemsCount = 0;//宝石计数器
     bool collect;
     public static bool isGem = false;//If模组中用来判断前面是不是宝石的布尔
+    public bool gemsTest = false;
 
     private void Start()
     {
@@ -35,6 +36,7 @@ public class CollectGem : MonoBehaviour
         if (gemCollider.tag == "Player")
         {
             //Debug.Log("rrr!");
+            gemsTest = true;
             Tweener tweener = transform.DOMove(this.transform.position + transform.forward, 1.2f);
         }
     }
@@ -44,6 +46,7 @@ public class CollectGem : MonoBehaviour
         if (gemCollider.tag == "Player")
         {
             isGem = false;
+            gemsTest = false;
         }
     }
 }

@@ -9,11 +9,15 @@ public class Movement : MonoBehaviour
     Animator dogBehaviour;
 
     ArrayList received = new ArrayList();//按下开始按钮后接收到的指令组
+    public ArrayList Received { get { return received; } }
     bool readin = false;//指示读取是否完成
     bool finished = false;//指示执行是否完成
 
     Vector3 destination;//移动到目的地
     Vector3 direction;//移动的方向
+
+    public Vector3 Destination { get { return destination; } }
+    public Vector3 Direction { get { return direction; } }
 
     public bool canCollect = false;
     public bool canOPen = false;
@@ -36,6 +40,8 @@ public class Movement : MonoBehaviour
     bool isGem;
     bool isSlime;
     bool turnSign = false;
+
+    public bool testMove = false;
 
     void Start()
     {
@@ -108,6 +114,7 @@ public class Movement : MonoBehaviour
     {                
         if (x.Equals("MoveForward"))
         {
+            testMove = true;
             dogBehaviour.SetBool("isMove", true);
             destination = this.transform.position + transform.forward;
             AudioManager.actionListener = 4;

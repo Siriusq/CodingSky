@@ -11,6 +11,7 @@ public class Attack : MonoBehaviour
     GameObject dog;
     public static bool isSlime = false;// If模组中用来判断前面是啥的布尔
     public GameManager gameManager;
+    public bool attackTest = false;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class Attack : MonoBehaviour
         if (attackCollider.tag == "Player")
         {
             isSlime = true;
+            attackTest = true;
         }        
     }
 
@@ -41,6 +43,7 @@ public class Attack : MonoBehaviour
     {
         if (leave.tag == "Player")
         {
+            attackTest = false;
             Tweener tweener = transform.DOMove(this.transform.position - transform.up, 1.5f);
             isSlime = false;
         }

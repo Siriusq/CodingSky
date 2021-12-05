@@ -8,6 +8,7 @@ public class LevelComplete : MonoBehaviour
     public GameManager gameManager;
     Animator chestBehaviour;
     bool open;
+    public bool enter = false;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class LevelComplete : MonoBehaviour
         if (chestCollider.tag == "Player")
         {
             //Debug.Log("Enter!");
+            enter = true;
             Tweener tweener = transform.DOMove(this.transform.position - transform.forward * 0.9f + transform.up * 0.2f, 1f);//箱子像后上移动，防止穿模
         }
     }

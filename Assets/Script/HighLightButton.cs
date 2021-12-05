@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class HighLightButton : MonoBehaviour
 {
     static ArrayList blocks = new ArrayList();
+    public ArrayList Blocks { get { return blocks; } }
     bool readin = false;//指示读取是否完成
     bool finished = false;//指示执行是否完成
 
@@ -30,6 +31,8 @@ public class HighLightButton : MonoBehaviour
     Button tempSubLoopButton;// 子循环面板命令
     Button tempIfButton;// if面板命令
     Button tempElseButton;// else面板命令
+
+    public static bool testHighlight = false;
 
 
     // Start is called before the first frame update
@@ -233,5 +236,6 @@ public class HighLightButton : MonoBehaviour
     {
         blocks = new ArrayList();
         blocks.AddRange(orders);
+        testHighlight = true;
     }
 }
