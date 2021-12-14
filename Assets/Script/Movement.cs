@@ -8,13 +8,13 @@ public class Movement : MonoBehaviour
 {
     Animator dogBehaviour;
 
-    ArrayList received = new ArrayList();//按下开始按钮后接收到的指令组
+    ArrayList received = new ArrayList();//Command list received after pressing the Execute button
     public ArrayList Received { get { return received; } }
-    bool readin = false;//指示读取是否完成
-    bool finished = false;//指示执行是否完成
+    bool readin = false;//Indicates if the read is complete
+    bool finished = false;//Indicates if execution is complete
 
-    Vector3 destination;//移动到目的地
-    Vector3 direction;//移动的方向
+    Vector3 destination;//Destinations to move to
+    Vector3 direction;//Direction of movement
 
     public Vector3 Destination { get { return destination; } }
     public Vector3 Direction { get { return direction; } }
@@ -25,16 +25,16 @@ public class Movement : MonoBehaviour
 
     public static bool canFly = false;
 
-    //下面是给if else的
-    GameObject conditionIf; //if的面板
-    GameObject conditionElse; //else的面板
-    Dropdown conditionDropdown; //条件选择下拉菜单
+    //if else panel
+    GameObject conditionIf; //if panel
+    GameObject conditionElse; //else panel
+    Dropdown conditionDropdown; //condition selet
 
-    ArrayList codes = new ArrayList();//if执行得到的数组
-    ArrayList conditionBlockList = new ArrayList();//其实和上面一样的东西，但是不这么搞有报错
+    ArrayList codes = new ArrayList();//if arraylist
+    ArrayList conditionBlockList = new ArrayList();//same to codes
 
-    ArrayList ifCodeBlockTags = new ArrayList();//if中的代码
-    ArrayList elseCodeBlockTags = new ArrayList();//else中的代码
+    ArrayList ifCodeBlockTags = new ArrayList();//code block in if panel
+    ArrayList elseCodeBlockTags = new ArrayList();//code block in else panel
     string ifBlock;
     string elseBlock;
     bool isGem;
@@ -71,7 +71,7 @@ public class Movement : MonoBehaviour
         {
             if (canFly)
             {
-                break;//狗狗被顶飞停止执行
+                break;//After the dog is toppled, the execution of the code block is stopped
             }
             if (s.Equals("if"))
             {
@@ -110,7 +110,7 @@ public class Movement : MonoBehaviour
         dogBehaviour.SetBool("isAttack", false);
     }
 
-    private void Move(string x)//狗狗动作代码
+    private void Move(string x)//Dog movement code
     {                
         if (x.Equals("MoveForward"))
         {
@@ -171,7 +171,7 @@ public class Movement : MonoBehaviour
             canOPen = true;
             AudioManager.actionListener = 6;
         }
-        //修复Z轴锁定不了的bug
+        //Fix the bug that Z-axis can't be locked
         Vector3 eulerRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(eulerRotation.x, eulerRotation.y, 0);
     }
@@ -182,7 +182,7 @@ public class Movement : MonoBehaviour
         received.AddRange(codes);
     }
 
-    private ArrayList ConditionBlocks()//判断执行if还是else的代码
+    private ArrayList ConditionBlocks()//Code to determine whether to execute an if or an else
     {
         codes = new ArrayList();
         ifCodeBlockTags = new ArrayList();
@@ -194,12 +194,12 @@ public class Movement : MonoBehaviour
         isGem = CollectGem.isGem;
         isSlime = Attack.isSlime;
 
-        int option = conditionDropdown.value;//下拉菜单的选项，0是史莱姆，1是宝石
+        int option = conditionDropdown.value;//Drop down menu options, 0 is Slime, 1 is Crystal
 
         ifBlock = conditionIf.transform.GetChild(0).tag;
         elseBlock = conditionElse.transform.GetChild(0).tag;
 
-        //判断框里是不是循环 都直接用数组存了，好回传
+        //Determine if there is a loop code block in the panel
         ifCodeBlockTags.AddRange(isLoop(ifBlock));
         elseCodeBlockTags.AddRange(isLoop(elseBlock));
 
@@ -235,21 +235,21 @@ public class Movement : MonoBehaviour
         return codes;
     }
 
-    private ArrayList isLoop(string s)// 判断if里面有没有循环或者子循环
+    private ArrayList isLoop(string s)// Determine if there is a loop or subloop inside the if block
     {
         ArrayList temp = new ArrayList();
 
-        if (s.Equals("Loop"))//有循环就把循环加到数组
+        if (s.Equals("Loop"))//If there is a loop, add the loop to the array
         {
             temp.AddRange(Execute.LoopBlockTags);
         }
-        else if (s.Equals("SubLoop"))//有子循环就把子循环加到数组
+        else if (s.Equals("SubLoop"))//If there is a subloop, add the subloop to the array
         {
             temp.AddRange(Execute.SubLoopBlockTags);
         }
         else
         {
-            temp.Add(s);//没有就只加原来的命令
+            temp.Add(s);//If not, just add the original command
         }
 
         return temp;

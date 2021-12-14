@@ -62,15 +62,15 @@ public class GameManager : MonoBehaviour
         PostLevel(level);
     }
 
-    public void Restart()//重新开始游戏
+    public void Restart()//reload scene
     {
-        int tempIndex = SceneManager.GetActiveScene().buildIndex;//buildingIndex是build setting里面场景的序号
+        int tempIndex = SceneManager.GetActiveScene().buildIndex;//buildingIndex is the index in build setting
         StartCoroutine(TransAnimation(tempIndex));
         StopCoroutine(TransAnimation(tempIndex));
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void Pause()//暂停游戏
+    public void Pause()//pause game
     {
         if (Time.timeScale == 1)
         {
@@ -84,20 +84,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ChooseLevel(int index)//关卡选择菜单，每个关卡块传入自己的关卡号
+    public void ChooseLevel(int index)//Level selection menu, each level block passes in its own level number
     {
-        int level = index + 1;//build里面scene从0开始计数，0是main，1是选关，所以+1
+        int level = index + 1;//build inside the scene count from 0, 0 is the main, 1 is the selection of the level, so +1
         StartCoroutine(TransAnimation(level));
         StopCoroutine(TransAnimation(level));
     }
 
-    public void BackToMenu()//回到关卡选择页面
+    public void BackToMenu()//Back to the level selection page
     {
         StartCoroutine(TransAnimation(1));
         StopCoroutine(TransAnimation(1));
     }
 
-    public void SettingPanel()//打开设置
+    public void SettingPanel()//Open Settings panel
     {
         if (settingPanel != null)
         {
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void VolumePanel()//打开音量控制
+    public void VolumePanel()//Turn on volume control panel
     {
         if (volumePanel != null)
         {
@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ShowTips()//提示面板
+    public void ShowTips()//Tip Panel
     {
         if(tipsPanel != null)
         {
@@ -145,28 +145,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LevelComplete()//通关页面
+    public void LevelComplete()//Level complete
     {
         if(winningPanel != null)
         {
             winningPanel.SetActive(true);
-            int gemCount = 3 - GameObject.FindGameObjectsWithTag("Gem").Length;//三个宝石，减掉剩下的就是收集了的
+            int gemCount = 3 - GameObject.FindGameObjectsWithTag("Gem").Length;//crystal count
             if(gemCount > 2)
             {
-                gems[2].SetActive(true);//三星
+                gems[2].SetActive(true);//3
             }
             if (gemCount > 1)
             {
-                gems[1].SetActive(true);//两星
+                gems[1].SetActive(true);//2
             }
             if (gemCount > 0)
             {
-                gems[0].SetActive(true);//一星
+                gems[0].SetActive(true);//1
             }
         }
     }
 
-    public void Failed()//狗子被弹飞后提示重开
+    public void Failed()//level failed
     {
         if(failPanel != null)
         {
@@ -175,14 +175,14 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void Continue()//加载下一关
+    public void Continue()//Loading the next level
     {
         int tempIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        StartCoroutine(TransAnimation(tempIndex));//buildingIndex是build setting里面场景的序号
+        StartCoroutine(TransAnimation(tempIndex));
         StopCoroutine(TransAnimation(tempIndex));
     }
 
-    IEnumerator TransAnimation(int index)//携程加载下一个场景，可以用在下一关按钮，也可以用在主菜单切换到关卡选择上
+    IEnumerator TransAnimation(int index)//Load next scene, either with the next level button, or with the main menu switch to level selection
     {
         transAnimation.SetTrigger("Start");
         yield return new WaitForSeconds(0.7f);

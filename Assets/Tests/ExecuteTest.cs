@@ -24,7 +24,7 @@ public class ExecuteTest
     }
 
     [UnityTest]
-    public IEnumerator MoveCommandTest()//测试移动数组是否传递
+    public IEnumerator MoveCommandTest()//Test if the move array is passed
     {
         GameObject dogKnight = MonoBehaviour.Instantiate(Resources.Load<GameObject>("DogPolyart"));
         movement = dogKnight.GetComponent<Movement>();
@@ -39,7 +39,7 @@ public class ExecuteTest
     }
 
     [UnityTest]
-    public IEnumerator HighLightTest()//测试高亮数组是否传递
+    public IEnumerator HighLightTest()//Test if the highlighted array is passed
     {
         yield return new WaitForSeconds(1f);
         ArrayList test = new ArrayList();

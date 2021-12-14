@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/***************************************************************************************
+*    Title: Implement scroll wheel button dragging and scroll wheel zooming under orthogonal camera
+*    Author: Yukisora
+*    Date: 2018
+*    Code version: 1.0
+*    Availability: https://www.cnblogs.com/Yukisora/p/8747167.html
+*
+***************************************************************************************/
+
 public class CameraControl : MonoBehaviour
 {
-    //cite: https://www.cnblogs.com/Yukisora/p/8747167.html
-    //改成滚轮缩放，右键拖动
+    //Scroll wheel to zoom, right click to drag
     private new Camera camera;
-    private bool isDrag = false;//是否处在拖动状态
-    private Vector3 startMousePosition;//开始拖动的时候鼠标在屏幕上的位置
-    private Vector3 startCameraPosition;//开始拖动的时候相机在世界空间上的位置
+    private bool isDrag = false;//Whether it is in the dragging state
+    private Vector3 startMousePosition;//The position of the mouse on the screen when you start dragging
+    private Vector3 startCameraPosition;//The position of the camera on the world space when you start dragging
     [SerializeField]
     private float ScrollScale = 0.5f;
     private float temp;
@@ -26,23 +34,23 @@ public class CameraControl : MonoBehaviour
         camera = GetComponent<Camera>();
         temp = camera.orthographicSize;
 
-        dragScaleX = 1.0f / camera.scaledPixelHeight;//横向缩放值
-        dragScaleY = 1.0f / camera.scaledPixelHeight;//纵向缩放值
+        dragScaleX = 1.0f / camera.scaledPixelHeight;//Horizontal scaling value
+        dragScaleY = 1.0f / camera.scaledPixelHeight;//Vertical scaling value
     }
 
     void Update()
     {
-        Drag();//拖动
-        Scale();//滚轮缩放
+        Drag();
+        Scale();
     }
 
-    private void Scale()//滚轮缩放
+    private void Scale()
     {
-        tempAxis = Input.GetAxis("Mouse ScrollWheel");//获取滚轮输入，-1/0/1
+        tempAxis = Input.GetAxis("Mouse ScrollWheel");//Get scroll wheel input, -1/0/1
         if (tempAxis == 0) return;
 
         temp -= tempAxis * ScrollScale * temp;
-        if (temp < 0)　　//控制不让视野为负值，导致内容被中心对称
+        if (temp < 0)　　//Control does not allow the field of view to be negative, causing the content to be centered and symmetrical
         {
             temp += tempAxis * ScrollScale * temp;
             return;
@@ -50,13 +58,13 @@ public class CameraControl : MonoBehaviour
         camera.orthographicSize = temp;
     }
 
-    private void Drag()//拖动
+    private void Drag()
     {
-        if (Input.GetMouseButtonDown(1))//右键按钮
+        if (Input.GetMouseButtonDown(1))//Right click button
         {
             isDrag = true;
-            startMousePosition = Input.mousePosition;//开始拖动前记录鼠标位置
-            startCameraPosition = transform.localPosition;//开始拖动前记录相机位置
+            startMousePosition = Input.mousePosition;//Record the mouse position before you start dragging
+            startCameraPosition = transform.localPosition;//Record the camera position before you start dragging
         }
         if (Input.GetMouseButtonUp(1))
         {

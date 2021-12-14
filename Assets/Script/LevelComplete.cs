@@ -21,7 +21,7 @@ public class LevelComplete : MonoBehaviour
         {
             //Debug.Log("Enter!");
             enter = true;
-            Tweener tweener = transform.DOMove(this.transform.position - transform.forward * 0.9f + transform.up * 0.2f, 1f);//箱子像后上移动，防止穿模
+            Tweener tweener = transform.DOMove(this.transform.position - transform.forward * 0.9f + transform.up * 0.2f, 1f);//Chest move backwards and upwards to prevent mold penetration
         }
     }
 
@@ -31,7 +31,7 @@ public class LevelComplete : MonoBehaviour
         if(chestCollider.tag == "Player" && open)
         {
             chestBehaviour.SetBool("reachTreasure", true);
-            // 弹出通关弹窗
+            // Pop-up level completion pop-ups
             StartCoroutine(PopUpTrans());
             StopCoroutine(PopUpTrans());
             

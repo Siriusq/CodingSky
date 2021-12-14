@@ -10,7 +10,7 @@ public class GemTestSuite
     private CollectGem collectGem;
 
     [UnityTest]
-    public IEnumerator GemCollider()//狗子进入和退出宝石
+    public IEnumerator GemCollider()//Dogs entering and exiting gems
     {
         GameObject dogKnight = MonoBehaviour.Instantiate(Resources.Load<GameObject>("DogPolyart"));
         GameObject gems = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Cuboid"));

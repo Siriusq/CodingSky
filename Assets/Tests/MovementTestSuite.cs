@@ -9,7 +9,7 @@ public class MovementTestSuite
     private Movement movement;
 
     [UnityTest]
-    public IEnumerator DogKnightFall()//π∑ «∑Ò ‹÷ÿ¡¶◊π¬‰≤‚ ‘
+    public IEnumerator DogKnightFall()//Whether the dog is subject to gravity fall test
     {
         GameObject dogKnight = MonoBehaviour.Instantiate(Resources.Load<GameObject>("DogPolyart"));
         movement = dogKnight.GetComponent<Movement>();
@@ -22,7 +22,7 @@ public class MovementTestSuite
     }
 
     [UnityTest]
-    public IEnumerator DogKnightMoveForward()//π∑«∞Ω¯≤‚ ‘
+    public IEnumerator DogKnightMoveForward()//Dog Forward Test
     {
         GameObject dogKnight = MonoBehaviour.Instantiate(Resources.Load<GameObject>("DogPolyart"));
         movement = dogKnight.GetComponent<Movement>();
@@ -45,7 +45,7 @@ public class MovementTestSuite
     }
 
     [UnityTest]
-    public IEnumerator DogKnightTurnLeft()//π∑◊Û◊™≤‚ ‘
+    public IEnumerator DogKnightTurnLeft()//Dog left turn test
     {
         GameObject dogKnight = MonoBehaviour.Instantiate(Resources.Load<GameObject>("DogPolyart"));
         movement = dogKnight.GetComponent<Movement>();
@@ -71,7 +71,7 @@ public class MovementTestSuite
     }
 
     [UnityTest]
-    public IEnumerator DogKnightTurnRight()//π∑”“◊™≤‚ ‘
+    public IEnumerator DogKnightTurnRight()//Dog Right Turn Test
     {
         GameObject dogKnight = MonoBehaviour.Instantiate(Resources.Load<GameObject>("DogPolyart"));
         movement = dogKnight.GetComponent<Movement>();
@@ -97,7 +97,7 @@ public class MovementTestSuite
     }
 
     [UnityTest]
-    public IEnumerator DogKnightTurnAround()//π∑µÙÕ∑≤‚ ‘
+    public IEnumerator DogKnightTurnAround()//Dog Turnaround Test
     {
         GameObject dogKnight = MonoBehaviour.Instantiate(Resources.Load<GameObject>("DogPolyart"));
         movement = dogKnight.GetComponent<Movement>();
@@ -123,7 +123,7 @@ public class MovementTestSuite
     }
 
     [UnityTest]
-    public IEnumerator MultiMoveTest()//¡¨–¯“∆∂Ø√¸¡Ó≤‚ ‘
+    public IEnumerator MultiMoveTest()//Continuous movement command test
     {
         GameObject dogKnight = MonoBehaviour.Instantiate(Resources.Load<GameObject>("DogPolyart"));
         movement = dogKnight.GetComponent<Movement>();

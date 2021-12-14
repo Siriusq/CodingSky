@@ -6,28 +6,28 @@ using UnityEngine.UI;
 
 public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    GameObject executePanel;// 执行面板
-    static ArrayList codeBlockTags = new ArrayList(); // 存储执行面版内命令的数组
+    GameObject executePanel;// Executive Panel
+    static ArrayList codeBlockTags = new ArrayList(); // An array that stores the commands to be executed in the panel
     public static ArrayList CodeBlockTags => codeBlockTags;//getter
 
-    public Slider loopCountSlider;// 调整循环次数的滑块
-    GameObject loopPanel; // 循环面板
-    int loopTime; // 循环次数
-    static ArrayList loopBlockTags = new ArrayList(); // 存储主循环面版内命令的数组
+    public Slider loopCountSlider;// Slider for adjusting the number of loop
+    GameObject loopPanel; // Loop Panel
+    int loopTime; // Number of loops
+    static ArrayList loopBlockTags = new ArrayList(); // Array for storing commands in the main loop panel
     public static ArrayList LoopBlockTags => loopBlockTags;//getter
 
-    public Slider subLoopCountSlider;// 调整子循环次数的滑块
-    GameObject subLoopPanel; // 子循环面板
-    int subLoopTime; // 子循环次数
-    static ArrayList subLoopBlockTags = new ArrayList(); // 存储子循环面版内命令的数组
+    public Slider subLoopCountSlider;// Slider for adjusting the number of subloop
+    GameObject subLoopPanel; // SubLoop Panel
+    int subLoopTime; // Number of subloops
+    static ArrayList subLoopBlockTags = new ArrayList(); // Array for storing commands in the subloop panel
     public static ArrayList SubLoopBlockTags => subLoopBlockTags;//getter
 
-    public Dropdown conditionDropdown; //条件选择下拉菜单
+    public Dropdown conditionDropdown; //Conditional selection drop-down menu
 
     public Movement player;
     public HighLightButton highLight;
 
-    public static ArrayList highlightButtons = new ArrayList();// 高亮顺序数组
+    public static ArrayList highlightButtons = new ArrayList();// Highlighted sequential arrays
     public GameObject clickBlock;
 
     public void OnPointerDown(PointerEventData eventData)
@@ -68,7 +68,7 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }        
     }
 
-    public void OnPointerUp(PointerEventData eventData) //鼠标抬起的时候把代码命令组传到Movement里
+    public void OnPointerUp(PointerEventData eventData) //Pass the code command group to Movement when the button is lifted
     {
         player.GetCode(codeBlockTags);
         HighLightButton.GetCode(highlightButtons);
@@ -78,7 +78,7 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         StopCoroutine(BlockWait());
     }
 
-    public ArrayList LoopArray() //获取循环面板里的代码
+    public ArrayList LoopArray() //Get the code in the loop panel
     {
         loopPanel = GameObject.FindGameObjectWithTag("LoopPanel");
         ArrayList loopArrayList = new ArrayList();
@@ -95,7 +95,7 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                     {
                         loopArrayList.AddRange(subLoopBlockTags);
                     }
-                    else if (loopBlock.tag.Equals("If"))//添加子循环的if支持
+                    else if (loopBlock.tag.Equals("If"))//Add if support for subloops
                     {
                         loopArrayList.Add("if");
                     }
@@ -109,7 +109,7 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         return loopArrayList;
     }
 
-    public ArrayList SubLoopArray() //获取子循环面板里的代码
+    public ArrayList SubLoopArray() //Get the code in the subloop panel
     {
         subLoopPanel = GameObject.FindGameObjectWithTag("SubLoopPanel");
         ArrayList subLoopArrayList = new ArrayList();        
@@ -122,7 +122,7 @@ public class Execute : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             {
                 foreach (Transform subLoopBlock in subLoopPanel.transform)
                 {
-                    if (subLoopBlock.tag.Equals("If"))//添加子循环的if支持
+                    if (subLoopBlock.tag.Equals("If"))//Add if support for subloops
                     {
                         subLoopArrayList.Add("if");
                     }

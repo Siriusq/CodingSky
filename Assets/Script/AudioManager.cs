@@ -64,43 +64,43 @@ public class AudioManager : MonoBehaviour
         if (warningListener) { Warning(); }
         switch (actionListener)
         {
-            case 1://警告
+            case 1://warning
                 Warning();
                 actionListener = 0;
                 break;
-            case 2://攻击
+            case 2://attack
                 Attack();
                 actionListener = 0;
                 break;
-            case 3://收集
+            case 3://collect
                 CollectGems();
                 actionListener = 0;
                 break;
-            case 4://移动
+            case 4://move
                 Step();
                 actionListener = 0;
                 break;
-            case 5://史莱姆
+            case 5://slime
                 Slime();
                 actionListener = 0;
                 break;
-            case 6://胜利
+            case 6://win
                 Win();
                 actionListener = 0;
                 break;
-            case 7://拖拽
+            case 7://drag
                 Drag();
                 actionListener = 0;
                 break;
-            case 8://放下
+            case 8://drop
                 Drop();
                 actionListener = 0;
                 break;
-            case 9://三星
+            case 9://star pop up
                 Star();
                 actionListener = 0;
                 break;
-            case 10://三星
+            case 10://full star
                 Vectory();
                 actionListener = 0;
                 break;
@@ -108,15 +108,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void MainSlider(float f)//主音量调节
+    public void MainSlider(float f)//Main volume adjust
     {
         audioMixer.SetFloat("MainMixer", Mathf.Log10(f) * 20);
         mainCache = f;
-        if (f == 0.0001f) { mainVol.gameObject.SetActive(false); }//滑块归零时自动开启静音按钮
-        else { mainVol.gameObject.SetActive(true); }//滑块大于向右滑动时解除静音
+        if (f == 0.0001f) { mainVol.gameObject.SetActive(false); }//Mute button automatically turns on when the slider is zeroed
+        else { mainVol.gameObject.SetActive(true); }//Unmute when sliding the slider to the right
     }
 
-    public void BgmSlider(float f)//BGM音量调节
+    public void BgmSlider(float f)//BGM volume adjust
     {
         audioMixer.SetFloat("BGMMixer", Mathf.Log10(f) * 20);
         musicCache = f;
@@ -124,7 +124,7 @@ public class AudioManager : MonoBehaviour
         else { musicVol.gameObject.SetActive(true); }
     }
 
-    public void SfxSlider(float f)//SFX音量调节
+    public void SfxSlider(float f)//SFX volume adjust
     {
         audioMixer.SetFloat("SFXMixer", Mathf.Log10(f) * 20);
         sfxCache = f;
@@ -132,7 +132,7 @@ public class AudioManager : MonoBehaviour
         else { sfxVol.gameObject.SetActive(true); }
     }
 
-    public void MuteButton()//一键静音
+    public void MuteButton()//Mute button
     {
         if (mainVol != null)
         {
@@ -142,7 +142,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void UnMuteButton()//取消静音
+    public void UnMuteButton()//Unmute
     {
         if(muteMainVol != null)
         {
@@ -151,7 +151,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void BgmMuteButton()//BGM静音
+    public void BgmMuteButton()//BGM Mute
     {
         if (musicVol != null)
         {
@@ -161,7 +161,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void UnBgmMuteButton()//取消BGM静音
+    public void UnBgmMuteButton()//BGM Unmute
     {
         if (muteMusicVol != null)
         {
@@ -170,7 +170,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void SfxMuteButton()//SFX静音
+    public void SfxMuteButton()//SFX Mute
     {
         if (sfxVol != null)
         {
@@ -180,7 +180,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void UnSfxMuteButton()//取消SFX静音
+    public void UnSfxMuteButton()//SFX Unmute
     {
         if (muteSfxVol != null)
         {

@@ -8,29 +8,29 @@ public class HighLightButton : MonoBehaviour
 {
     static ArrayList blocks = new ArrayList();
     public ArrayList Blocks { get { return blocks; } }
-    bool readin = false;//指示读取是否完成
-    bool finished = false;//指示执行是否完成
+    bool readin = false;//Indicates if the read is complete
+    bool finished = false;//Indicates if execution is complete
 
-    GameObject executePanel;// 执行面板
-    int executeChildCount;// 执行面板命令数量
-    public Slider loopCountSlider;// 调整循环次数的滑块
-    GameObject loopPanel; // 循环面板
-    int loopChildCount;//循环面板命令数量
-    int loopTimes;//循环次数
-    public Slider subLoopCountSlider;// 调整子循环次数的滑块
-    GameObject subLoopPanel; // 子循环面板
-    int subLoopChildCount;//子循环面板命令数量
-    int subLoopTimes;//子循环次数
-    public Dropdown conditionDropdown; //条件选择下拉菜单
-    int option;//下拉菜单选项
-    GameObject ifPanel;//条件if
-    GameObject elsePanel;//条件else
+    GameObject executePanel;// Executive Panel
+    int executeChildCount;// Number of commands in the execution panel
+    public Slider loopCountSlider;// Slider for adjusting the loop count
+    GameObject loopPanel; // Loop Panel
+    int loopChildCount;//Number of commands in the loop panel
+    int loopTimes;//Loop time
+    public Slider subLoopCountSlider;// Slider for adjusting the subloop count
+    GameObject subLoopPanel; // Subloop Panel
+    int subLoopChildCount;//Number of commands in the subloop panel
+    int subLoopTimes;//Sub loop time
+    public Dropdown conditionDropdown; //Conditional selection drop-down menu
+    int option;//Drop down menu options
+    GameObject ifPanel;//if
+    GameObject elsePanel;//else
 
-    Button tempButton;// 执行面板命令
-    Button tempLoopButton;// 循环面板命令
-    Button tempSubLoopButton;// 子循环面板命令
-    Button tempIfButton;// if面板命令
-    Button tempElseButton;// else面板命令
+    Button tempButton;// Executive Panel Button
+    Button tempLoopButton;// Loop Panel Button
+    Button tempSubLoopButton;// Subloop Panel Button
+    Button tempIfButton;// If Panel Button
+    Button tempElseButton;// Else Panel Button
 
     public static bool testHighlight = false;
 
@@ -47,7 +47,7 @@ public class HighLightButton : MonoBehaviour
         if (blocks != null && !readin)
         {            
             readin = true;           
-            StartCoroutine(StartHighLight());//与狗狗移动同步进行代码块高亮
+            StartCoroutine(StartHighLight());//Code block highlighting in sync with dog movement
         }
 
         if (finished)
@@ -58,14 +58,14 @@ public class HighLightButton : MonoBehaviour
 
     IEnumerator StartHighLight()
     {
-        executePanel = GameObject.FindGameObjectWithTag("execute_panel"); // 找到游戏中的执行面版
-        executeChildCount = executePanel.transform.childCount; //面板中代码块的个数
+        executePanel = GameObject.FindGameObjectWithTag("execute_panel"); // Find the executive panel in the game
+        executeChildCount = executePanel.transform.childCount; //Number of code blocks in the panel
 
         for (int i = 0; i < executeChildCount; i++)
         {            
             tempButton = executePanel.transform.GetChild(i).GetComponent<Button>();
             if (Movement.canFly)
-            { //狗狗被顶飞停止执行
+            {
                 break; 
             } 
             if (tempButton.transform.tag.Equals("Loop"))
@@ -98,22 +98,22 @@ public class HighLightButton : MonoBehaviour
         yield return new WaitForSeconds(1);
     }
 
-    IEnumerator SubLoop()//子循环的
+    IEnumerator SubLoop()//Sub Loop
     {
         subLoopPanel = GameObject.FindGameObjectWithTag("SubLoopPanel");
-        subLoopChildCount = subLoopPanel.transform.childCount; //面板中代码块的个数
+        subLoopChildCount = subLoopPanel.transform.childCount;
         subLoopTimes = (int)subLoopCountSlider.value;
 
         for (int n = 0; n < subLoopTimes; n++)
         {
             if (Movement.canFly)
-            { //狗狗被顶飞停止执行
+            {
                 break;
             }
             for (int k = 0; k < subLoopChildCount; k++)
             {
                 if (Movement.canFly)
-                { //狗狗被顶飞停止执行
+                {
                     break;            
                 }
                 tempSubLoopButton = subLoopPanel.transform.GetChild(k).GetComponent<Button>();
@@ -123,10 +123,10 @@ public class HighLightButton : MonoBehaviour
         }        
     }
 
-    IEnumerator Loop()//主循环的
+    IEnumerator Loop()//Loop
     {
         loopPanel = GameObject.FindGameObjectWithTag("LoopPanel");
-        loopChildCount = loopPanel.transform.childCount; //面板中代码块的个数
+        loopChildCount = loopPanel.transform.childCount;
         loopTimes = (int)loopCountSlider.value;
 
         for (int m = 0; m < loopTimes; m++)
@@ -134,7 +134,7 @@ public class HighLightButton : MonoBehaviour
             for (int j = 0; j < loopChildCount; j++)
             {
                 if (Movement.canFly)
-                { //狗狗被顶飞停止执行
+                {
                     break;
                 }
                 tempLoopButton = loopPanel.transform.GetChild(j).GetComponent<Button>();
@@ -142,7 +142,7 @@ public class HighLightButton : MonoBehaviour
                 {
                     yield return StartCoroutine(SubLoop());
                     StopCoroutine(SubLoop());
-                }//不加循环里的if了，套娃套傻了，在drop里也砍掉了，要命
+                }
                 else
                 {
                     tempLoopButton.Select();
@@ -152,7 +152,7 @@ public class HighLightButton : MonoBehaviour
         }        
     }
 
-    IEnumerator Condition()//条件语句的
+    IEnumerator Condition()//if else
     {
         option = conditionDropdown.value;
         ifPanel = GameObject.FindGameObjectWithTag("SubCondition");
@@ -167,7 +167,7 @@ public class HighLightButton : MonoBehaviour
             if (isSlime)
             {
                 tempIfButton.Select();
-                yield return StartCoroutine(IfButton(tempIfButton.transform.tag));//等待协程完成
+                yield return StartCoroutine(IfButton(tempIfButton.transform.tag));
                 StopCoroutine(IfButton(tempIfButton.transform.tag));
             }
             else
@@ -196,7 +196,7 @@ public class HighLightButton : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
     }
 
-    IEnumerator IfButton(string s)//执行if面板内的命令
+    IEnumerator IfButton(string s)//Execute the commands in the if panel
     {
         if (s.Equals("SubLoop"))
         {
@@ -214,7 +214,7 @@ public class HighLightButton : MonoBehaviour
         }
     }
 
-    IEnumerator ElseButton(string s)//执行else面板内的命令
+    IEnumerator ElseButton(string s)//Execute the commands in the else panel
     {
         if (s.Equals("SubLoop"))
         {
@@ -232,7 +232,7 @@ public class HighLightButton : MonoBehaviour
         }
     }
 
-    public static void GetCode(ArrayList orders)//判断play按钮是否已经按下
+    public static void GetCode(ArrayList orders)//Determine if the Execute button has been pressed
     {
         blocks = new ArrayList();
         blocks.AddRange(orders);

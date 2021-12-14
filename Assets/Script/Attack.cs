@@ -9,9 +9,9 @@ public class Attack : MonoBehaviour
     public static int attackCount = 0;
     bool attack;
     GameObject dog;
-    public static bool isSlime = false;// If模组中用来判断前面是啥的布尔
+    public static bool isSlime = false;// Used in the if panel for determining objects in front of the character
     public GameManager gameManager;
-    public bool attackTest = false;
+    public bool attackTest = false;// Determines whether a character can attack
 
     void Start()
     {
@@ -41,7 +41,7 @@ public class Attack : MonoBehaviour
 
     void OnTriggerExit(Collider leave)
     {
-        if (leave.tag == "Player")
+        if (leave.tag == "Player")//Slime attack characters
         {
             attackTest = false;
             Tweener tweener = transform.DOMove(this.transform.position - transform.up, 1.5f);
@@ -63,25 +63,25 @@ public class Attack : MonoBehaviour
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(0.5f);//等待1s
-        Movement.canFly = true;//狗狗被顶飞停止执行
-        yield return new WaitForSeconds(1f);//等待1s
+        yield return new WaitForSeconds(0.5f);
+        Movement.canFly = true;//Characters can be hit by Slimes
+        yield return new WaitForSeconds(1f);
         
         
         dog = GameObject.FindGameObjectWithTag("Player");
-        dog.transform.GetComponent<Rigidbody>().freezeRotation = false;//关闭狗狗的旋转锁定
+        dog.transform.GetComponent<Rigidbody>().freezeRotation = false;//Turn off character rotation lock
 
-        Tweener tweener = transform.DOMove(this.transform.position + transform.up, 0.1f);//狗狗起飞！
+        Tweener tweener = transform.DOMove(this.transform.position + transform.up, 0.1f);//Dog Flying!
         AudioManager.actionListener = 5;
 
-        yield return new WaitForSeconds(2f);//等待1s
+        yield return new WaitForSeconds(2f);
         gameManager.Failed();
         AudioManager.actionListener = 1;
     }
 
     IEnumerator AttackWait()
     {
-        // 调整动画时间达成受攻击后挂掉的效果
+        // Adjust the animation time to achieve the effect of Slime disappearing after being attacked
         yield return new WaitForSeconds(0.5f);
         attacking.SetBool("GotHit", true);
         yield return new WaitForSeconds(1f);

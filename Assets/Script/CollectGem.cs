@@ -5,9 +5,9 @@ using DG.Tweening;
 
 public class CollectGem : MonoBehaviour
 {
-    public static int gemsCount = 0;//宝石计数器
+    public static int gemsCount = 0;//Gem Counter
     bool collect;
-    public static bool isGem = false;//If模组中用来判断前面是不是宝石的布尔
+    public static bool isGem = false;
     public bool gemsTest = false;
 
     private void Start()
@@ -15,9 +15,9 @@ public class CollectGem : MonoBehaviour
         DOTween.Clear(true);
     }
 
-    void OnTriggerStay(Collider gemCollider)//当玩家在宝石碰撞体里停留时
+    void OnTriggerStay(Collider gemCollider)//When the player stays in the gem collision body
     {
-        collect = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>().canCollect;//读取移动脚本里的布尔值，判断能否拾取星星
+        collect = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>().canCollect;//Read the boolean value from the move script to determine if the star can be picked up
         isGem = true;
         if (gemCollider.tag == "Player" && collect)
         {
@@ -25,13 +25,13 @@ public class CollectGem : MonoBehaviour
             gemsCount++;
             AudioManager.actionListener = 3;
             Debug.Log(gemsCount);
-            Destroy(gameObject);//删除宝石（相当于吃掉
+            Destroy(gameObject);//Delete Gems 
             collect = false;
             isGem = false;
         }
     }
 
-    void OnTriggerEnter(Collider gemCollider)//玩家进入宝石的碰撞体时，升起宝石防止穿模
+    void OnTriggerEnter(Collider gemCollider)//When the player enters the collision body of the jewel, the jewel is raised to prevent mold penetration
     {
         if (gemCollider.tag == "Player")
         {
